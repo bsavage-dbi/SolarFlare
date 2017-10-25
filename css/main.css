@@ -1,0 +1,82 @@
+/* Style the base button to comply with SWDC branding */
+.btn {
+  color: #fff;
+  margin-right: 25px;
+  font-size: 14px;
+  font-weight: 700;
+  text-align: center;
+  text-transform: uppercase;
+  padding: 10px 15px;
+}
+
+/* Style the success button to comply with SWDC brand colors */
+.btn-success{
+  background-color: #96bd4c;
+  border-color: #96bd4c;
+}
+
+/* Style the success button's hover behaviour to comply with SWDC brand colors */
+.btn-success:hover {
+    background-color: #e6e97b;
+    border-color: #e6e97b;
+}
+
+/* Style the warning button to comply with SWDC brand colors */
+.btn-warning {
+    background-color: #f99d1c;
+    border-color: #f99d1c;
+}
+
+/* Style the warning button's hover behaviour to comply with SWDC brand colors */
+.btn-warning:hover  {
+    color: #fff;
+    background-color: #fab024;
+    border-color: #fab024;
+}
+
+/* Style the primary button to comply with SWDC brand colors */
+.btn-primary {
+    background-color: #04c9d7;
+    border-color: #04c9d7;
+    width: 30px;
+    height: 30px;
+    text-align: center;
+    padding: 4px 0;
+    line-height: 1.428571429;
+    /*border-radius: -1px;*/
+    float: right;
+}
+
+/* Style the primary button's hover behaviour to comply with SWDC brand colors */
+.btn-primary:hover  {
+    color: #fff;
+    background-color: #04d6e1;
+    border-color: #04d6e1;
+}
+
+/*Remove grey line on top of table*/
+.table th, .table td {
+     border-top: none !important;
+ }
+
+/* Adjust A-Team QA table for second input width*/
+.expand_input {
+    width: 83.5%;
+}
+
+/* Style the primary button to comply with SWDC brand colors */
+.btn-swap {
+    background-color: #04c9d7;
+    border-color: #04c9d7;
+}
+
+/* Style the primary button's hover behaviour to comply with SWDC brand colors */
+.btn-swap:hover  {
+    color: #fff;
+    background-color: #04d6e1;
+    border-color: #04d6e1;
+}
+
+#convert_input{
+    height: 100px;
+}

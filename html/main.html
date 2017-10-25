@@ -1,0 +1,785 @@
+<!doctype html>
+<html>
+  <head>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/css/bootstrap.min.css" integrity="sha384-/Y6pD6FV/Vv2HJnA6t+vslU6fwYXjCFtcEpHbNJ0lyAFsXTsjBbfaDjzALeQsN6M" crossorigin="anonymous">
+    <!-- stylesheets -->
+    <link rel="stylesheet" type="text/css" href="../css/global.css" />
+    <link rel="stylesheet" type="text/css" href="../css/main.css" />
+
+        <!-- javascript -->
+    <script type="text/javascript" src="../js/jquery-3.2.1.slim.min.js"></script>
+    <script type="text/javascript" src="../js/bootstrap.min.js"></script>
+  </head>
+
+<body>
+
+<!-- Menu Tabs -->
+<div class="tab">
+  <button class="tablinks" id="resolution_tab">Resolution</button>
+  <button class="tablinks" id="qa_tab">QA Test</button>
+  <button class="tablinks" id="release_tab">Release Forms</button>
+  <button class="tablinks" id="redirect_tab">Redirect Test</button>
+  <button class="tablinks" id="qa_verification_tab">A Team Test</button>
+  <button class="tablinks" id="bug_report_tab">Bug Report</button>
+  <button class="tablinks" id="path_converter_tab">Converter</button>
+</div>
+
+
+<!-- Resolution Tab -->
+<div id="resolution_tab_content" class="tabcontent">
+  <form id="resolution" class="form-horizontal" onsubmit="return false">
+  <fieldset>
+
+  <!-- RESOLUTION Name -->
+  <legend align="center">Resolution Steps</legend>
+
+  <!-- Select Basic -->
+  <div class="form-group">
+    <label class="col-md-4 control-label" for="action">Action</label>
+    <div class="col-md-4">
+      <select id="action" name="action" class="form-control">
+        <option value="Created">Created</option>
+        <option value="Updated">Updated</option>
+        <option value="Deleted">Deleted</option>
+      </select>
+    </div>
+  </div>
+
+  <!-- Text input-->
+  <div class="form-group">
+    <label class="col-md-4 control-label" for="task">Description</label>
+    <div class="col-md-4">
+    <input id="task" name="task" type="text" placeholder="Short description of action/task" class="form-control input-md">
+    </div>
+  </div>
+
+  <!-- Textarea -->
+  <div class="form-group">
+    <label class="col-md-4 control-label" for="note">Note(s)</label>
+    <div class="col-md-4">
+      <textarea class="form-control" id="note" name="note" placeholder="Any relevant observations goes here"></textarea>
+    </div>
+  </div>
+
+  <!-- Textarea -->
+  <div class="form-group">
+    <label class="col-md-4 control-label" for="steps">Step(s)</label>
+    <div class="col-md-4">
+      <textarea class="form-control" id="steps" name="steps" placeholder="Enter a new line for each step"></textarea>
+    </div>
+  </div>
+
+  <!-- Textarea -->
+  <div class="form-group">
+    <label class="col-md-4 control-label" for="paths">Path(s)</label>
+    <div class="col-md-4">
+      <textarea class="form-control" id="paths" name="paths" placeholder="Paths to be submitted, one per line"></textarea>
+    </div>
+  </div>
+
+  <!-- Textarea -->
+  <div class="form-group">
+    <label class="col-md-4 control-label" for="substep">Affected</label>
+    <div class="col-md-4">
+      <textarea class="form-control" id="subpath" name="substep" placeholder="Paths also affected, one per line"></textarea>
+    </div>
+  </div>
+
+  <!-- Select Multiple -->
+  <div class="form-group">
+    <label class="col-md-4 control-label" for="notify">Notify</label>
+    <div class="col-md-4">
+      <select id="notify" name="notify" class="form-control" multiple="multiple">
+        <option value="[~vivian.chollette]">Vivian Chollette</option>
+        <option value="[~juan.jaramillo]">Juan Jaramillo</option>
+        <option value="[~lashanna.martin-wood]">Lashanna Martin-Wood</option>
+        <option value="[~todd.huoni]">Todd Huoni</option>
+        <option value="[~rachel.morrill]">Rachel Morrill</option>
+      </select>
+    </div>
+  </div>
+
+  <!-- Button (Double) -->
+  <div class="form-group">
+    <label class="col-md-4 control-label"></label>
+    <div class="col-md-6">
+      <button id="submit_resolution" name="submit" class="btn btn-success" type="button">Create</button>
+      <button id="clear" name="clear" class="btn btn-warning">Clear</button>
+    </div>
+  </div>
+
+  </fieldset>
+  </form>
+</div>
+<!-- END Resolution Tab -->
+
+<!-- QA Results Tab -->
+<div id="qa_tab_content" class="tabcontent">
+  <form class="form-horizontal" id="test_qa">
+  <fieldset>
+
+  <!-- QA Name -->
+  <legend align="center">QA Results</legend>
+
+  <!-- Select Basic -->
+  <div class="form-group">
+    <label class="col-md-4 control-label" for="selectbasic">Outcome</label>
+    <div class="col-md-4">
+      <select id="outcome" name="selectbasic" class="form-control">
+        <option value="(/) PASSED">(/) Passed</option>
+        <option value="(!) INCOMPLETE">(!) Incomplete</option>
+        <option value="(x) FAILED">(x) Failed</option>
+      </select>
+    </div>
+  </div>
+
+  <!-- Textarea -->
+  <div class="form-group">
+    <label class="col-md-4 control-label" for="qa_steps">Replication Steps</label>
+    <div class="col-md-4">
+      <textarea class="form-control" id="qa_steps" name="qa_steps" placeholder="Substep or note"></textarea>
+    </div>
+  </div>
+
+  <!-- Textarea -->
+  <div class="form-group">
+    <label class="col-md-4 control-label" for="qa_results">Results</label>
+    <div class="col-md-4">
+      <textarea class="form-control" id="qa_results" name="qa_results" placeholder="Results"></textarea>
+    </div>
+  </div>
+
+  <!-- Textarea -->
+  <div class="form-group">
+    <label class="col-md-4 control-label" for="qa_note">Note(s)</label>
+    <div class="col-md-4">
+      <textarea class="form-control" id="qa_note" name="qa_note"  placeholder="Any relevant observations goes here"></textarea>
+    </div>
+  </div>
+
+  <!-- Textarea -->
+  <div class="form-group">
+    <label class="col-md-4 control-label" for="screenshot">Screenshots</label>
+    <div class="col-md-4">
+      <textarea class="form-control" id="screenshot" name="screenshot" placeholder="!attached-image.png/jpg/gif|thumbnail!"></textarea>
+    </div>
+  </div>
+
+  <!-- Multiple Checkboxes -->
+  <div class="form-group">
+    <label class="col-md-4 control-label" for="routine_checks">Routine Checks</label>
+    <div class="col-md-4">
+    <div class="checkbox">
+      <label for="routine_checks-0">
+        <input type="checkbox" name="routine_checks" id="check_metadata" checked="checked">
+        Metadata
+      </label>
+    </div>
+    <div class="checkbox">
+      <label for="routine_checks-1">
+        <input type="checkbox" name="routine_checks" id="check_urls" checked="checked">
+        URLs
+      </label>
+    </div>
+    <div class="checkbox">
+      <label for="routine_checks-2">
+        <input type="checkbox" name="routine_checks" id="check_images" checked="checked">
+        Images display properly
+      </label>
+    </div>
+    <div class="checkbox">
+      <label for="routine_checks-3">
+        <input type="checkbox" name="routine_checks" id="check_links" checked="checked">
+        All links operational
+      </label>
+    </div>
+    <div class="checkbox">
+      <label for="routine_checks-4">
+        <input type="checkbox" name="routine_checks" id="check_videos" checked="checked">
+        Videos playable
+      </label>
+    </div>
+    <div class="checkbox">
+      <label for="routine_checks-5">
+        <input type="checkbox" name="routine_checks" id="check_downloads" checked="checked">
+        Download Buttons
+      </label>
+    </div>
+    <div class="checkbox">
+      <label for="routine_checks-6">
+        <input type="checkbox" name="routine_checks" id="check_language" checked="checked">
+        Language consistency
+      </label>
+    </div>
+    <div class="checkbox">
+      <label for="routine_checks-7">
+        <input type="checkbox" name="routine_checks" id="check_cross_browsing" checked="checked">
+        Cross Browsing
+      </label>
+    </div>
+    </div>
+  </div>
+
+  <!-- Select Basic -->
+  <div class="form-group">
+    <label class="col-md-4 control-label" for="environment">Environment</label>
+    <div class="col-md-4">
+      <select id="environment" name="environment" class="form-control">
+        <option value="Tested on Author">Tested on Author</option>
+        <option value="Tested on Live">Tested on Live</option>
+        <option value="Tested on QA">Tested on QA</option>
+      </select>
+    </div>
+  </div>
+
+  <!-- Multiple Checkboxes -->
+  <div class="form-group">
+    <label class="col-md-4 control-label" for="browsers_tested">Browsers tested</label>
+    <div class="col-md-4">
+    <div class="checkbox">
+      <label for="browsers_tested-0">
+        <input type="checkbox" name="browsers_tested" id="check_chrome" checked="checked">
+        Chrome
+      </label>
+    </div>
+    <div class="checkbox">
+      <label for="browsers_tested-1">
+        <input type="checkbox" name="browsers_tested" id="check_ff" checked="checked">
+        FF
+      </label>
+    </div>
+    <div class="checkbox">
+      <label for="browsers_tested-2">
+        <input type="checkbox" name="browsers_tested" id="check_ie">
+        IE
+      </label>
+    </div>
+    </div>
+  </div>
+
+  <!-- Select Multiple -->
+  <div class="form-group">
+    <label class="col-md-4 control-label" for="qa_notify">Notify</label>
+    <div class="col-md-4">
+      <select id="qa_notify" name="qa_notify" class="form-control" multiple="multiple">
+        <option value="[~vivian.chollette]">Vivian Chollette</option>
+        <option value="[~jean.maradiaga]">Jean Maradiaga</option>
+        <option value="[~emilio.sanchez]">Emilio Sanchez</option>
+        <option value="[~ronny.vargas]">Ronny Vargas</option>
+        <option value="[~hardif.vindas]">Hardif Vindas</option>
+        <option value="[~cesar.peralta]">Cesar Peralta</option>
+        <option value="[~marianela.sanchez]">Marianela Sanchez</option>
+        <option value="[~luis.corrales]">Luis Corrales</option>
+        <option value="[~todd.huoni]">Todd Huoni</option>
+        <option value="[~lashanna.martin-wood]">Lashanna Martin-Wood</option>
+      </select>
+    </div>
+  </div>
+
+    <!-- Button (Double) -->
+    <div class="form-group">
+      <label class="col-md-4 control-label"></label>
+      <div class="col-md-6">
+        <button id="submit_quality_assurance" name="submit" class="btn btn-success" type="button">Create</button>
+        <button id="clear" name="clear" class="btn btn-warning">Clear</button>
+      </div>
+    </div>
+
+  </fieldset>
+  </form>
+</div>
+<!-- End QA tab -->
+
+<!-- Release Tab -->
+<div id="release_tab_content" class="tabcontent">
+  <form class="form-horizontal">
+    <fieldset>
+    <!-- RELEASE Name -->
+    <legend align="center">Release Forms</legend>
+      <!-- Textarea -->
+      <div class="form-group">
+        <label class="col-md-4 control-label" for="release_input">Item(s)</label>
+        <div class="col-md-4">
+          <textarea class="form-control" id="release_input" name="release_input" placeholder="SC Paths/URLs/Notes"></textarea>
+        </div>
+      </div>
+
+      <!-- Select Multiple -->
+      <div class="form-group">
+        <label class="col-md-4 control-label" for="release_notify">Notify</label>
+        <div class="col-md-4">
+          <select id="release_notify" name="release_notify" class="form-control" multiple="multiple">
+            <option value="[~vivian.chollette]">Vivian Chollette</option>
+            <option value="[~jean.maradiaga]">Jean Maradiaga</option>
+            <option value="[~emilio.sanchez]">Emilio Sanchez</option>
+            <option value="[~ronny.vargas]">Ronny Vargas</option>
+            <option value="[~hardif.vindas]">Hardif Vindas</option>
+            <option value="[~cesar.peralta]">Cesar Peralta</option>
+            <option value="[~marianela.sanchez]">Marianela Sanchez</option>
+            <option value="[~luis.corrales]">Luis Corrales</option>
+            <option value="[~todd.huoni]">Todd Huoni</option>
+            <option value="[~lashanna.martin-wood]">Lashanna Martin-Wood</option>
+          </select>
+        </div>
+      </div>
+
+      <!-- Multiple Radios -->
+      <div class="form-group">
+        <label class="col-md-4 control-label" for="release_radios">Form for</label>
+        <div class="col-md-4">
+          <div class="radio">
+            <label for="release_radios-0">
+            <input type="radio" name="release_radios" id="workbox" value="is_work" checked="checked">
+            Workbox
+            </label>
+          </div>
+          <div class="radio">
+            <label for="release_radios-1">
+            <input type="radio" name="release_radios" id="publish" value="is_publish">
+            Published
+            </label>
+          </div>
+          <div class="radio">
+            <label for="release_radios-2">
+            <input type="radio" name="release_radios" id="live" value="is_live">
+            Live
+            </label>
+          </div>
+          <div class="radio">
+            <label for="release_radios-3">
+            <input type="radio" name="release_radios" id="att_note" value="is_note">
+            Attention Note
+            </label>
+          </div>
+        </div>
+      </div>
+
+      <!-- Button (Double) -->
+      <div class="form-group">
+        <label class="col-md-4 control-label"></label>
+        <div class="col-md-6">
+          <button id="submit_release_form" name="submit" class="btn btn-success" type="button">Create</button>
+          <button id="clear" name="clear" class="btn btn-warning">Clear</button>
+        </div>
+      </div>
+
+    </fieldset>
+  </form>
+</div>
+<!-- End Release TAB -->
+
+<!-- Redirects Tab -->
+<div id="redirect_tab_content" class="tabcontent">
+
+  <form class="form-horizontal">
+  <fieldset>
+
+    <!-- REDIRECT Name -->
+    <legend align="center">Ready for Verification - Redirects</legend>
+
+  <!-- Select Basic -->
+  <div class="form-group">
+    <label class="col-md-4 control-label" for="redirect_platform">Platform</label>
+    <div class="col-md-4">
+      <select id="redirect_platform" name="redirect_plataform" class="form-control">
+        <option value="Akamai">Akamai</option>
+        <option value="Web Admin Tool">Web Admin Tool</option>
+      </select>
+    </div>
+  </div>
+
+  <!-- Select Multiple -->
+  <div class="form-group">
+    <label class="col-md-4 control-label" for="policy_name">Policy Name</label>
+      <div class="col-md-4">
+        <select id="policy_name" name="policy_name" class="form-control">
+          <option value="ER_Webhelpdesk">Web Help Desk</option>
+          <option value="ER_SolarWinds1">SolarWinds v.1</option>
+          <option value="ER_Dameware">Dameware</option>
+          <option value="ER_AppOptics">AppOptic</option>
+          <option value="ER_ServU">Serv-U</option>
+          <option value="ER_Kiwisyslog">Kiwi</option>
+        </select>
+      </div>
+  </div>
+
+  <!-- Prepended text-->
+  <div class="form-group">
+    <label class="col-md-4 control-label" for="prependedtext">Version</label>
+    <div class="col-md-4">
+      <div class="input-group">
+        <span class="input-group-addon">ver.</span>
+        <input id="redirect_version" name="prependedtext" class="form-control" placeholder="Appended on creation like ER_SolarWinds1 v158" type="text">
+      </div>
+    </div>
+  </div>
+
+    <!-- Text input-->
+  <!--   <div class="form-group">
+      <label class="col-md-4 control-label" for="policy_name">Policy Name</label>
+      <div class="col-md-4">
+      <input id="policy_name" name="policy_name" type="text" placeholder="Policy Name and Version" class="form-control input-md">
+      </div>
+    </div> -->
+
+  <!-- Dynamic Table and Button -->
+  <div class="form-group">
+    <div class="container">
+      <div class="row">
+        <div class="span5">
+       <!--  REDIRECT TABLE -->
+          <table id="resolution_table" class="table table-striped table-condensed">
+            <thead>
+              <tr>
+                <th>From</th>
+                <th>To</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td class="redirect_value"><input id="redirect_from_0" name="task" type="text" placeholder="Redirects from..." class="form-control input-md"></td>
+                <td class="redirect_value"><input id="redirect_to_0" name="task" type="text" placeholder="Redirects to..." class="form-control input-md"></td>
+              </tr>
+            </tbody>
+          </table>
+          <!-- END REDIRECT TABLE -->
+        </div>
+      </div>
+    </div>
+
+    <div class="form-group">
+        <div class="col-md-6">
+          <button id="add_row" name="submit" class="btn btn-primary" type="button">+</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Textarea -->
+  <div class="form-group">
+    <label class="col-md-4 control-label" for="redirect_notes">Note(s)</label>
+    <div class="col-md-4">
+      <textarea class="form-control" id="redirect_notes" name="redirect_notes"  placeholder="Any relevant observations goes here"></textarea>
+    </div>
+  </div>
+
+    <!-- Select Multiple -->
+    <div class="form-group">
+      <label class="col-md-4 control-label" for="qa_notify">Notify</label>
+      <div class="col-md-4">
+        <select id="redirect_notify" name="qa_notify" class="form-control" multiple="multiple">
+          <option value="[~vivian.chollette]">Vivian Chollette</option>
+          <option value="[~lashanna.martin-wood]">Lashanna Martin-Wood</option>
+          <option value="[~todd.huoni]">Todd Huoni</option>
+          <option value="[~rachel.morrill]">Rachel Morrill</option>
+          <option value="[~luis.corrales]">Luis Corrales</option>
+        </select>
+      </div>
+    </div>
+
+  <!-- Button (Double) -->
+  <div class="form-group">
+    <label class="col-md-4 control-label"></label>
+      <div class="col-md-6">
+        <button id="submit_redirect_form" name="submit" class="btn btn-success" type="button">Create</button>
+        <button id="clear" name="clear" class="btn btn-warning">Clear</button>
+    </div>
+  </div>
+
+  </fieldset>
+  </form>
+</div>
+<!-- End Redirects tab -->
+
+<!-- QA Verification Tab -->
+<div id="qa_verification_tab_content" class="tabcontent">
+  <form class="form-horizontal">
+    <fieldset>
+
+    <!-- REDIRECT Name -->
+    <legend align="center">A Team - Verification Results</legend>
+
+    <!-- Select Basic -->
+    <div class="form-group">
+      <label class="col-md-4 control-label" for="qa_passed">QA Passed</label>
+      <div class="col-md-4">
+        <select id="qa_passed" name="qa_passed" class="form-control">
+          <option value="{color:green}OK!{color}">Yes</option>
+          <option value="{color:red}Failed!{color}">No</option>
+        </select>
+      </div>
+    </div>
+
+    <!-- Multiple Checkboxes -->
+    <div class="form-group">
+      <label class="col-md-4 control-label" for="qa_component_test">Component</label>
+      <div class="col-md-4">
+      <div class="checkbox">
+        <label for="qa_component_test-0">
+          <input type="checkbox" name="qa_component_test" id="check_documentation" checked="checked">
+          Verified Documentation
+        </label>
+      </div>
+      <div class="checkbox">
+        <label for="qa_component_test-1">
+          <input type="checkbox" name="qa_component_test" id="check_new_page" checked="checked">
+          Verified on new page
+        </label>
+      </div>
+      <div class="checkbox">
+        <label for="qa_component_test-2">
+          <input type="checkbox" name="qa_component_test" id="check_universal" checked="checked">
+          Verified Universal text
+        </label>
+      </div>
+      <div class="checkbox">
+        <label for="qa_component_test-3">
+          <input type="checkbox" name="qa_component_test" id="check_cta" checked="checked">
+          Verified CTA links
+        </label>
+      </div>
+      <div class="checkbox">
+        <label for="qa_component_test-4">
+          <input type="checkbox" name="qa_component_test" id="check_product" checked="checked">
+          Verified Product Catalog
+        </label>
+      </div>
+      <div class="checkbox">
+        <label for="qa_component_test-5">
+          <input type="checkbox" name="qa_component_test" id="check_responsive" checked="checked">
+          Verified Responsiveness /Mobile
+        </label>
+      </div>
+      <div class="checkbox">
+        <label for="qa_component_test-6">
+          <input type="checkbox" name="qa_component_test" id="check_translation" checked="checked">
+          Responsiveness translations
+        </label>
+      </div>
+      <div class="checkbox">
+        <label for="qa_component_test-7">
+          <input type="checkbox" name="qa_component_test" id="check_browsers" checked="checked">
+          Verified support in all browsers
+        </label>
+      </div>
+      </div>
+    </div>
+
+    <!-- Dynamic Table and Button -->
+    <div class="form-group">
+      <div class="container">
+        <div class="row">
+          <div class="span5">
+         <!--  REDIRECT TABLE -->
+            <table id="impact_table" class="table table-striped table-condensed">
+              <thead>
+                <tr>
+                  <th>Tested</th>
+                  <th>Impact</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td class="impact_value is_check"><input type="checkbox" name="tested_impact" id="check_impact_0" checked="checked">
+                  </td>
+                  <td class="impact_value expand_input"><input id="tested_impact_0" name="task" type="text" placeholder="Tested on..." class="form-control input-md"></td>
+                </tr>
+              </tbody>
+            </table>
+            <!-- END REDIRECT TABLE -->
+          </div>
+        </div>
+      </div>
+
+      <div class="form-group">
+          <div class="col-md-6">
+            <button id="add_qa_row" name="submit" class="btn btn-primary" type="button">+</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Textarea -->
+    <div class="form-group">
+      <label class="col-md-4 control-label" for="qa_example_page">Tested Example pages</label>
+      <div class="col-md-4">
+        <textarea class="form-control" id="qa_example_page" name="qa_example_page" placeholder="Tested pages URLs"></textarea>
+      </div>
+    </div>
+
+    <!-- Textarea -->
+    <div class="form-group">
+      <label class="col-md-4 control-label" for="found_issues">Found Issues</label>
+      <div class="col-md-4">
+        <textarea class="form-control" id="found_issues" name="found_issues" placeholder="In topic pages there is a reponsive issue in ipad view. !ipadviewcta.jpg|thumbnail!"></textarea>
+      </div>
+    </div>
+
+    <!-- Textarea -->
+    <div class="form-group">
+      <label class="col-md-4 control-label" for="a_team_note">Note(s)</label>
+      <div class="col-md-4">
+        <textarea class="form-control" id="a_team_note" name="a_team_note" placeholder="Ready for UAT."></textarea>
+      </div>
+    </div>
+
+    <!-- Select Multiple -->
+    <div class="form-group">
+      <label class="col-md-4 control-label" for="a_team_notify">Notify</label>
+      <div class="col-md-4">
+        <select id="a_team_notify" name="a_team_notify" class="form-control" multiple="multiple">
+          <option value="[~martin.novak]">Martin Novak</option>
+          <option value="[~Ilia.Dimitrov]">Ilia Dimitrov</option>
+          <option value="[~haizhou.pan]">Haizhou Pan</option>
+          <option value="[~rajita.mokkapati]">Rajita Mokkapati</option>
+          <option value="[~jose.porras]">Jose Porras</option>
+          <option value="[~wendy.villegas]">Wendy Villegas</option>
+          <option value="[~steven.braunstein]">Steven Braunstein</option>
+          <option value="[~william.ferrufino]">William Ferrufino</option>
+          <option value="[~kacy.hulme]">Kacy Hulme</option>
+          <option value="[~andrea.barto]">Andrea Barto</option>
+          <option value="[~rachel.morrill]">Rachel Morrill</option>
+        </select>
+      </div>
+    </div>
+
+    <!-- Button (Double) -->
+    <div class="form-group">
+      <label class="col-md-4 control-label"></label>
+        <div class="col-md-6">
+          <button id="submit_a_team_qa" name="submit" class="btn btn-success" type="button">Create</button>
+          <button id="clear" name="clear" class="btn btn-warning">Clear</button>
+      </div>
+    </div>
+
+    </fieldset>
+  </form>
+</div>
+<!-- End QA  Verification tab -->
+
+<!-- Bug Report Tab -->
+<div id="bug_report_tab_content" class="tabcontent">
+  <form class="form-horizontal">
+    <fieldset>
+
+    <!-- REDIRECT Name -->
+    <legend align="center">Bug Report</legend>
+
+    <!-- Textarea -->
+    <div class="form-group">
+      <label class="col-md-4 control-label" for="a_team_steps">Step(s)</label>
+      <div class="col-md-4">
+        <textarea class="form-control" id="bug_steps" name="a_team_steps" placeholder="Enter a new line for each step"></textarea>
+      </div>
+    </div>
+
+    <!-- Textarea -->
+    <div class="form-group">
+      <label class="col-md-4 control-label" for="bug_current_result">Current Results</label>
+      <div class="col-md-4">
+        <textarea class="form-control" id="bug_current_result" name="bug_current_result" placeholder="Current result when following the steps above"></textarea>
+      </div>
+    </div>
+
+    <!-- Textarea -->
+    <div class="form-group">
+      <label class="col-md-4 control-label" for="bug_expected_result">Expected Results</label>
+      <div class="col-md-4">
+        <textarea class="form-control" id="bug_expected_result" name="bug_expected_result" placeholder="Expected result when following the testing steps"></textarea>
+      </div>
+    </div>
+
+    <!-- Textarea -->
+    <div class="form-group">
+      <label class="col-md-4 control-label" for="bug_screenshots">Screenshots</label>
+      <div class="col-md-4">
+        <textarea class="form-control" id="bug_screenshots" name="a_team_screenshots"  placeholder="!attached-image.png/jpg/gif|thumbnail!"></textarea>
+      </div>
+    </div>
+
+    <!-- Select Multiple -->
+    <div class="form-group">
+      <label class="col-md-4 control-label" for="bug_notify">Notify</label>
+      <div class="col-md-4">
+        <select id="bug_notify" name="bug_notify" class="form-control" multiple="multiple">
+          <option value="[~martin.novak]">Martin Novak</option>
+          <option value="[~Ilia.Dimitrov]">Ilia Dimitrov</option>
+          <option value="[~steven.braunstein]">Steven braustein</option>
+          <option value="[~haizhou.pan]">Haizhou Pan</option>
+          <option value="[~rajita.mokkapati]">Rajita Mokkapati</option>
+          <option value="[~jose.porras]">Jose Porras</option>
+          <option value="[~wendy.villegas]">Wendy Villegas</option>
+          <option value="[~steven.braunstein]">Steven Braunstein</option>
+          <option value="[~william.ferrufino]">William Ferrufino</option>
+          <option value="[~kacy.hulme]">Kacy Hulme</option>
+          <option value="[~andrea.barto]">Andrea Barto</option>
+          <option value="[~rachel.morrill]">Rachel Morrill</option>
+        </select>
+      </div>
+    </div>
+
+    <!-- Button (Double) -->
+    <div class="form-group">
+      <label class="col-md-4 control-label"></label>
+        <div class="col-md-6">
+          <button id="submit_bug_report" name="submit" class="btn btn-success" type="button">Create</button>
+          <button id="clear" name="clear" class="btn btn-warning">Clear</button>
+      </div>
+    </div>
+
+    </fieldset>
+  </form>
+</div>
+<!-- End Bug Report tab -->
+
+<!-- Converter Tab -->
+<div id="path_converter_tab_content" class="tabcontent">
+  <form class="form-horizontal">
+    <fieldset>
+
+    <!-- REDIRECT Name -->
+    <legend align="center" id="converter_name">Path to URL Converter</legend>
+
+    <!-- Textarea -->
+    <div class="form-group">
+      <label class="col-md-4 control-label" for="convert_input">Input Path(s)</label>
+      <div class="col-md-4">                     
+        <textarea class="form-control" id="convert_input" name="convert_input" placeholder="Paths or URLs go here"></textarea>
+      </div>
+    </div>
+
+      <!-- Multiple Radios -->
+      <div class="form-group">
+        <label class="col-md-4 control-label" for="converter_radios">Generate for</label>
+        <div class="col-md-4">
+          <div class="radio">
+            <label for="converter_radios-0">
+            <input type="radio" name="converter_radios" id="author" value="author" checked="checked">
+            Author
+            </label>
+          </div>
+          <div class="radio">
+            <label for="converter_radios-1">
+            <input type="radio" name="converter_radios" id="live" value="live">
+            Live
+            </label>
+          </div>
+        </div>
+      </div>
+
+    <!-- Button (Double) -->
+    <div class="form-group">
+        <div class="col-md-6">
+          <button id="submit_path_convert" name="submit" class="btn btn-success" type="button">Convert</button>
+          <button id="clear_converter" name="clear" class="btn btn-warning">Clear</button>
+          <button id="swap_converter" name="swap" class="btn btn-swap">Swap</button>
+      </div>
+    </div>
+
+    </fieldset>
+  </form>
+</div>
+
+  <!-- load javascript: unique html page javascript file -->
+  <script type="text/javascript" src="../js/main.js"></script>
+</body>
+
+</html>
