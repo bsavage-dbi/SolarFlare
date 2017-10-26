@@ -467,7 +467,7 @@ function generate_conversion(convert_input, url_format){
       if (/SWDCv2/i.test(new_url)){
         new_url = new_url.replace('SWDCv2', 'solarwinds');
       }
-      
+
       url_base ? url_base = url_base.trim().replace(/\s/g, '-') : url_base = '';
       new_url  =  new_url.toLowerCase() + url_base;
       item_list.push(new_url);
@@ -564,12 +564,15 @@ function clear_converter(){
 function swap_converter(){
   event.preventDefault();
   if(path_to_url){
-    $("label[for='convert_input']").text("Input Url(s)")
-    $("#converter_name").text("URL to Path Converter")
+    $("label[for='convert_input']").text("Input Url(s)");
+    $("#converter_name").text("URL to Path Converter");
+    // $("label[for='converter_radios']").text("Generate URL(s) for");
     path_to_url = false;
   }else{
-    $("label[for='convert_input']").text("Input Path(s)")
-    $("#converter_name").text("Path to URL Converter")
+    console.log('url to path');
+    $("label[for='convert_input']").text("Input Path(s)");
+    $("#converter_name").text("Path to URL Converter");
+    // $("label[for='converter_radios']").text("Generate Path(s) from");
     path_to_url = true;
   }
 }

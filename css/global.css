@@ -2,6 +2,7 @@ body {
   width: 500px;
   padding: 3px;
   background: #F6F6F6;
+  /*font-family: Roboto,sans-serif;*/
 }
 
 legend {
@@ -14,9 +15,12 @@ legend {
 
 /* Style the tab */
 div.tab {
+    border: 0;
+    border-bottom: 5px solid #04c9d7;
+    background-color: #444;
     overflow: hidden;
-    border: 1px solid #ccc;
-    background-color: #f1f1f1;
+/*    border: 1px solid #ccc;
+    background-color: #f1f1f1;*/
 }
 
 /* Style the buttons inside the tab */
@@ -28,16 +32,22 @@ div.tab button {
     cursor: pointer;
     padding: 15px 21px;
     transition: 0.3s;
+    text-transform: uppercase;
+    color: #fff;
+    font-size: 13.43px;
+    font-weight: 500;
 }
 
 /* Change background color of buttons on hover */
 div.tab button:hover {
-    background-color: #ddd;
+    /*background-color: #ddd;*/
+    background-color: #a1a1a1;
 }
 
 /* Create an active/current tablink class */
 div.tab button.active {
-    background-color: #ccc;
+    /*background-color: #ccc;*/
+    background-color: #666666;
 }
 
 /* Style the tab content */
