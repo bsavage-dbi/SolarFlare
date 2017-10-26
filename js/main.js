@@ -438,6 +438,11 @@ function generate_conversion(convert_input, url_format){
         new_url = author_path + new_url + '.com/';
       }
 
+      //Check if the paths V2 syntax and act accordinly 
+      if (/SWDCv2/i.test(new_url)){
+        new_url = new_url.replace('SWDCv2', 'solarwinds');
+      }
+
       url_base ? url_base = url_base.trim().replace(/\s/g, '-') : url_base = '';
       new_url  =  new_url.toLowerCase() + url_base;
       item_list.push(new_url);
@@ -458,6 +463,11 @@ function generate_conversion(convert_input, url_format){
         new_url = live_path + new_url + '.com/';
       }
 
+      //Check if the paths V2 syntax and act accordinly 
+      if (/SWDCv2/i.test(new_url)){
+        new_url = new_url.replace('SWDCv2', 'solarwinds');
+      }
+      
       url_base ? url_base = url_base.trim().replace(/\s/g, '-') : url_base = '';
       new_url  =  new_url.toLowerCase() + url_base;
       item_list.push(new_url);
@@ -468,6 +478,12 @@ function generate_conversion(convert_input, url_format){
   if(!path_to_url && url_format == 'author'){
     $.each(convert_input, function(index, item) {
       new_url = new URL(item);
+
+      //Check if the URLs contains solarwind as a hostname, if it does replace it for v2's path syntax
+      if (/solarwinds/i.test(new_url)){
+        new_url.hostname = new_url.hostname.replace('solarwinds', 'SWDCv2');
+      }
+
       item_list.push(sc_path + new_url.host.replace(/author\.|\.com/gi, '') + new_url.pathname.replace(/-/g, ' '));
     });
   }
@@ -476,6 +492,12 @@ function generate_conversion(convert_input, url_format){
   if(!path_to_url && url_format == 'live'){
     $.each(convert_input, function(index, item) {
       new_url = new URL(item);
+
+      //Check if the URLs contains solarwind as a hostname, if it does replace it for v2's path syntax
+      if (/solarwinds/i.test(new_url)){
+        new_url.hostname = new_url.hostname.replace('solarwinds', 'SWDCv2');
+      }
+
       item_list.push(sc_path + new_url.host.replace(/www\.|\.com/gi, '') + new_url.pathname.replace(/-/g, ' '));
     });
   }
