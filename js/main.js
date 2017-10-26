@@ -21,8 +21,6 @@ function open_tab(tabName) {
     var content = tabName + "_content";
     var tab_id  = '#' + tabName;
 
-    console.log(content);
-
     // Get all elements with class="tabcontent" and hide them
     tabcontent = document.getElementsByClassName("tabcontent");
     for (i = 0; i < tabcontent.length; i++) {
@@ -374,7 +372,7 @@ function generate_bug_report(steps, current_result, expected_result, screenshot,
 //This function takes a set of variables and creates the A-Team QA template with them.
 function generate_a_team_report(qa_passed, check_documentation, check_new_page, check_universal, check_cta, check_product,
     check_responsive, check_translation, check_browsers, example_pages, found_issues, a_team_note, notify, impact_list, impact_value) {
-  var a_team_form =
+    var a_team_form =
 
     `h3. Verification Results` + `\n` + ` ` + `\n` +
 
@@ -440,7 +438,7 @@ function generate_conversion(convert_input, url_format){
         new_url = author_path + new_url + '.com/';
       }
 
-      url_base = url_base.trim().replace(/\s/g, '-')
+      url_base ? url_base = url_base.trim().replace(/\s/g, '-') : url_base = '';
       new_url  =  new_url.toLowerCase() + url_base;
       item_list.push(new_url);
     });
@@ -460,7 +458,7 @@ function generate_conversion(convert_input, url_format){
         new_url = live_path + new_url + '.com/';
       }
 
-      url_base = url_base.trim().replace(/\s/g, '-')
+      url_base ? url_base = url_base.trim().replace(/\s/g, '-') : url_base = '';
       new_url  =  new_url.toLowerCase() + url_base;
       item_list.push(new_url);
     });
