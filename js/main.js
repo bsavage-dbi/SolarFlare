@@ -43,8 +43,8 @@ function pull_values_for_resolution () {
 
   var action = $("#action").val();
   var description = $("#task").val();
-  var note = $("#note").val() || "N/A";
-  var steps = $("#steps").val();
+  var note = $("#note").val().split('\n') || "N/A";
+  var steps = $("#steps").val().split('\n');
   var paths = $("#paths").val();
   var subpath = $("#subpath").val() || "N/A";
   var notify  = $('#notify').val() || [];
@@ -230,11 +230,21 @@ function generate_resolution_steps (action, description, note, steps, paths, sub
   "* "+ action + " " + description + " as requested" + "\n" +
   "\n" +
   "h4." + "\n" +
-  "{panel:title=*Notes*|borderStyle=ridge|borderColor=#FFDF80|titleBGColor=#FFDF80|bgColor=#FFF7DF|titleColor=#FF0000}" + "\n" +
-  "* " + note + "\n" +
+  "{panel:title=*Notes*|borderStyle=ridge|borderColor=#FFDF80|titleBGColor=#FFDF80|bgColor=#FFF7DF|titleColor=#FF0000}" + "\n";
+
+  for (var i = 0, l = note.length; i < l; i++ ) {
+    note[i].trim() ? resolution_steps += "* " + note[i] + `\n` : resolution_steps +=`\n`;
+  }
+
+  resolution_steps +=
   "{panel}"  + "\n" +
-  "{panel:title=Testing Instructions|borderStyle=double|borderColor=#ccc|titleBGColor=#008EBA|bgColor=#F5F5F5|titleColor=#ffffff}" + "\n" +
-  "# " + steps + "\n" +
+  "{panel:title=Testing Instructions|borderStyle=double|borderColor=#ccc|titleBGColor=#008EBA|bgColor=#F5F5F5|titleColor=#ffffff}" + "\n";
+
+  for (var i = 0, l = steps.length; i < l; i++ ) {
+    steps[i].trim() ? resolution_steps += "# " + steps[i] + `\n` : resolution_steps +=`\n`;
+  }
+
+  resolution_steps +=
   "{panel}"   + "\n" +
   "\\\\" + "\n" +
   "{panel:title=SC Paths|borderStyle=solid|borderColor=#F8F8FF|titleBGColor=#C1CDCD|bgColor=#F8F8FF|titleColor=#292929}"  + "\n" +
