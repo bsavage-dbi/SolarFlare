@@ -61,9 +61,9 @@ function pull_values_for_qa_results () {
 
   // TESTS
   var outcome = $("#outcome").val();
-  var steps = $("#qa_steps").val();
-  var results = $("#qa_results").val();
-  var note = $("#qa_note").val() || "N/A";
+  var steps = $("#qa_steps").val().split('\n');
+  var results = $("#qa_results").val().split('\n');
+  var note = $("#qa_note").val().split('\n') || "N/A";
   var screenshot = $("#screenshot").val();
   var environment = $("#environment").val();
 
@@ -265,15 +265,26 @@ function generate_qa_steps(outcome, steps, results, note, screenshot, check_meta
   "h4. " + outcome + "\n" + " " + "\n" +
 
   "----" + "\n" +
-  "h3. Replication Steps" + "\n" +
-  "# " + steps + "\n" + " " + "\n" +
+  "h3. Replication Steps" + "\n";
+  for (var i = 0, l = steps.length; i < l; i++ ) {
+    steps[i].trim() ? qa_results += "# " + steps[i] + `\n` : qa_results +=`\n`;
+  }
 
-  "h3. Results"  + "\n" +
-  "* " + results + "\n" + " " + "\n" +
+  qa_results += " " + "\n" +
 
-  "h3. Notes" + "\n" +
-  "* " + note + "\n" + " " + "\n" +
+  "h3. Results"  + "\n";
+  for (var i = 0, l = results.length; i < l; i++ ) {
+    results[i].trim() ? qa_results += "* " + results[i] + `\n` : qa_results +=`\n`;
+  }
 
+  qa_results += " " + "\n" +
+
+  "h3. Notes" + "\n";
+  for (var i = 0, l = note.length; i < l; i++ ) {
+    note[i].trim() ? qa_results += "* " + note[i] + `\n` : qa_results +=`\n`;
+  }
+
+   qa_results += " " + "\n" +
   "h3. Screenshots" + "\n" +
    screenshot + "\n" + " " + "\n" +
 
