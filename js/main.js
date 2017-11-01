@@ -105,16 +105,18 @@ function pull_values_for_redirect () {
   var policy  = $("#policy_name").val();
   var redirect_version = $("#redirect_version").val();
   var notify  = $('#redirect_notify').val() || [];
-  var note = $("#redirect_notes").val() || "N/A";
-  var redirect_list = [];
+  var note = $("#redirect_notes").val().split('\n') || "N/A";
+  var redirect_origin = $('#redirect_origin').val().split('\n') || [];
+  var redirect_destiny = $('#redirect_destiny').val().split('\n') || [];
 
+  //var redirect_list = [];
   //Casi me pego un tiro haciendo esta funcion...
-  $.each($("#resolution_table > tbody  > tr > td"), function(){
-    redirect_list.push($(this).find('input').val());
-  });
+  // $.each($("#resolution_table > tbody  > tr > td"), function(){
+  //   redirect_list.push($(this).find('input').val());
+  // });
 
   //console.log(redirect_list);
-  generate_redirect_forms(platform, policy, redirect_version, notify, note, redirect_list);
+  generate_redirect_forms(platform, policy, redirect_version, notify, note, redirect_origin, redirect_destiny);
 }
 
 //This function pulls the values for the A-team QA forms
@@ -355,9 +357,12 @@ function generate_release_forms(content, notify, form_format){
 //Here I use a tortoise-and-hare algorithm, where you have two pointers at the head of the linked list, 
 //one traverses the list two nodes at a time, and one traverses the list one node at a time; 
 //if ever the pointers point to the same node, you have a cycle somewhere.
-function generate_redirect_forms(platform, policy, redirect_version, notify, note, redirect_list){
+function generate_redirect_forms(platform, policy, redirect_version, notify, note, redirect_origin, redirect_destiny){
 
-  var j = 1;
+  console.log('Origin - ' + redirect_origin);
+  console.log('Destiny - ' + redirect_destiny);
+
+  //var j = 1;
   var redirect_form = 
 
     `h3. {panel:title=(on) *Ready for verification*|titleBGColor=#FFCEB8|titleColor=#292929}`  + `\n` +
@@ -374,17 +379,26 @@ function generate_redirect_forms(platform, policy, redirect_version, notify, not
 
     // Los redirects vienen en pares ordenados por ello los contadores j,i deben siempre de seguir
     // un crecimiento lineal de x = n + 2
-    for ( var i = 0, l = redirect_list.length; i < l; i++ ) {
-        redirect_form += `| ` + redirect_list[i] + ` | ` + redirect_list[j] + ` |`  + `\n`;
-        j += 2;
-        i += 1;
+    // for ( var i = 0, l = redirect_list.length; i < l; i++ ) {
+    //     redirect_form += `| ` + redirect_list[i] + ` | ` + redirect_list[j] + ` |`  + `\n`;
+    //     j += 2;
+    //     i += 1;
+    // }
+
+    for (var i = 0, l = redirect_origin.length; i < l; i++ ) {
+      redirect_form += `| ` + redirect_origin[i] + ` | ` + redirect_destiny[i] + ` |`  + `\n`;
     }
 
     redirect_form += 
     ` ` + `\n` +
-    `h4. {color:red}Notes{color}`  + `\n` +
-    `* ` + note + `\n` + ` ` + `\n` +
+    `h4. {color:red}Notes{color}`  + `\n`;
 
+    for (var i = 0, l = note.length; i < l; i++ ) {
+      note[i].trim() ? redirect_form += `* ` + note[i] + `\n` : redirect_form +=`\n`;
+    }
+
+    redirect_form += 
+    ` ` + `\n` +
     `*FYI*`  + `\n` +
      notify;
 
@@ -653,7 +667,7 @@ document.querySelector('button#bug_report_tab').addEventListener('click', open_t
 document.querySelector('button#path_converter_tab').addEventListener('click', open_tab.bind(this,'path_converter_tab'));
 
 //binds event to add new row button click
-document.querySelector('button#add_row').addEventListener('click', add_new_redirect_row.bind(this,'add_row'));
+//document.querySelector('button#add_row').addEventListener('click', add_new_redirect_row.bind(this,'add_row'));
 
 //binds event to new QA row button click
 document.querySelector('button#add_qa_row').addEventListener('click', add_new_add_qa_row.bind(this,'add_row'));

@@ -97,3 +97,8 @@
     background-color: #fab024;
     border-color: #fab024;
 }
+
+/*Sets a custom height for these list*/
+.redirect_list {
+  height: 90px;
+}
