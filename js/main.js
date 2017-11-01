@@ -179,8 +179,8 @@ function pull_values_for_a_team () {
   
   // TEXTARE VARIABLES
   var example_pages = $("#qa_example_page").val();
-  var found_issues = $("#found_issues").val();
-  var a_team_note = $("#a_team_note").val() || "N/A";
+  var found_issues = $("#found_issues").val().split('\n');
+  var a_team_note = $("#a_team_note").val().split('\n') || "N/A";
 
   var notify  = $('#a_team_notify').val() || [];
 
@@ -359,9 +359,6 @@ function generate_release_forms(content, notify, form_format){
 //if ever the pointers point to the same node, you have a cycle somewhere.
 function generate_redirect_forms(platform, policy, redirect_version, notify, note, redirect_origin, redirect_destiny){
 
-  console.log('Origin - ' + redirect_origin);
-  console.log('Destiny - ' + redirect_destiny);
-
   //var j = 1;
   var redirect_form = 
 
@@ -392,7 +389,7 @@ function generate_redirect_forms(platform, policy, redirect_version, notify, not
     redirect_form += 
     ` ` + `\n` +
     `h4. {color:red}Notes{color}`  + `\n`;
-
+ 
     for (var i = 0, l = note.length; i < l; i++ ) {
       note[i].trim() ? redirect_form += `* ` + note[i] + `\n` : redirect_form +=`\n`;
     }
@@ -459,13 +456,20 @@ function generate_a_team_report(qa_passed, check_list, example_pages, found_issu
     `*Tested Example pages*` + `\n` +
       example_pages + `\n` + ` ` + `\n` +
 
-    `*Found Issues*` + `\n` + ` ` + `\n` +
+    `*Found Issues*` + `\n` + ` ` + `\n`;
 
-     found_issues + `\n` + ` ` + `\n` +
+    for (var i = 0, l = found_issues.length; i < l; i++ ) {
+      found_issues[i].trim() ? a_team_form += `- ` + found_issues[i] + `\n` : a_team_form +=`\n`;
+    }
 
-     notify + `\n` + ` ` + `\n` +
+     a_team_form +=
 
-     a_team_note;
+     `\n` + ` ` + `\n` +
+     notify + `\n` + ` ` + `\n`;
+
+    for (var i = 0, l = a_team_note.length; i < l; i++ ) {
+      a_team_note[i].trim() ? a_team_form += `* ` + a_team_note[i] + `\n` : a_team_form +=`\n`;
+    }
 
     copy_to_clipboard(a_team_form);
 }
