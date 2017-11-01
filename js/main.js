@@ -91,7 +91,7 @@ function pull_values_for_qa_results () {
 //This function pulls the values for the release forms
 function pull_values_for_realease () {
 
-  var content = $("#release_input").val();
+  var content = $("#release_input").val().split('\n');
   var notify  = $('#release_notify').val() || [];
   var form_format = $("input:radio[name='release_radios']:checked").val();
 
@@ -309,8 +309,11 @@ function generate_release_forms(content, notify, form_format){
     release_form =
       "{panel:title=*Submitted to Workbox*|borderStyle=double|borderColor=#ccc|titleBGColor=#999933|bgColor=#FFFFFF|titleColor=#FFF}"  + "\n" +
       "h6. SC Path"  + "\n" +
-      "{quote}"  + "\n" +
-       content   + "\n" +
+      "{quote}"  + "\n";
+      for (var i = 0, l = content.length; i < l; i++ ) {
+        content[i].trim() ? release_form += content[i] + `\n` : release_form +=`\n`;
+      }
+      release_form +=
       "{quote}"  + "\n" +
       "{panel}"  + "\n" +
       "*FYI*"  + "\n" +
@@ -321,8 +324,11 @@ function generate_release_forms(content, notify, form_format){
     release_form =
       "{panel:title=*Published*|borderStyle=double|borderColor=#ccc|titleBGColor=#9ACD32|bgColor=#F5FFFA|titleColor=#292929}"  + "\n" +
       "h6. SC Path"  + "\n" +
-      "{quote}"  + "\n" +
-       content   + "\n" +
+      "{quote}"  + "\n";
+      for (var i = 0, l = content.length; i < l; i++ ) {
+        content[i].trim() ? release_form += content[i] + `\n` : release_form +=`\n`;
+      }
+      release_form +=
       "{quote}"  + "\n" +
       "{panel}"  + "\n" +
       "*FYI*"  + "\n" +
@@ -333,8 +339,11 @@ function generate_release_forms(content, notify, form_format){
     release_form =
       "{panel:title=*Live*|titleBGColor=#00712B|titleColor=#ffffff}"  + "\n" +
       "h6. URL"  + "\n" +
-      "{quote}"  + "\n" +
-       content   + "\n" +
+      "{quote}"  + "\n";
+      for (var i = 0, l = content.length; i < l; i++ ) {
+        content[i].trim() ? release_form += content[i] + `\n` : release_form +=`\n`;
+      }
+      release_form +=
       "{quote}"  + "\n" +
       "{panel}"  + "\n" + " " + "\n" +
       "*FYI*"  + "\n" +
@@ -343,8 +352,11 @@ function generate_release_forms(content, notify, form_format){
 
   if (form_format == "is_note"){
     release_form =
-      "{panel:title=(!) *ATTENTION*|titleBGColor=#FFFFCC|titleColor=#FF3300}"   + "\n" +
-      "h6. " + content    + "\n" +
+      "{panel:title=(!) *ATTENTION*|titleBGColor=#FFFFCC|titleColor=#FF3300}"   + "\n";
+      for (var i = 0, l = content.length; i < l; i++ ) {
+        content[i].trim() ? release_form += `h6. ` + content[i] + `\n` : release_form +=`\n`;
+      }
+      release_form +=
       "{panel}"   + "\n" +
       "*FYI*"     + "\n" +
        notify;
