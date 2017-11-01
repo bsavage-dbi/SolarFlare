@@ -80,3 +80,20 @@
 #convert_input{
     height: 100px;
 }
+
+/* Style the primary button to comply with SWDC brand colors */
+.btn-remove-row {
+    margin-left: 10px;
+    text-align: center;
+    padding: 0px 5px;
+    font-size: small;
+    background-color: #f99d1c;
+    border-color: #f99d1c;
+}
+
+/* Style the primary button's hover behaviour to comply with SWDC brand colors */
+.btn-remove-row:hover  {
+    color: #fff;
+    background-color: #fab024;
+    border-color: #fab024;
+}

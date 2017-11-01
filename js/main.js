@@ -55,6 +55,10 @@ function pull_values_for_resolution () {
 //This function pulls the values for the QA results form
 function pull_values_for_qa_results () {
 
+  // Pass and Fail Variables
+  var ok = '(/)';
+  var fail = '(x)';
+
   // TESTS
   var outcome = $("#outcome").val();
   var steps = $("#qa_steps").val();
@@ -64,14 +68,14 @@ function pull_values_for_qa_results () {
   var environment = $("#environment").val();
 
   // ROUTINE CHECKS
-  var check_metadata = $("#check_metadata").is(":checked") ? '(/)' :'(x)';
-  var check_urls = $("#check_urls").is(":checked") ? '(/)' :'(x)';
-  var check_images = $("#check_images").is(":checked") ? '(/)' :'(x)';
-  var check_links = $("#check_links").is(":checked") ? '(/)' :'(x)';
-  var check_videos = $("#check_videos").is(":checked") ? '(/)' :'(x)';
-  var check_downloads = $("#check_downloads").is(":checked") ? '(/)' :'(x)';
-  var check_language = $("#check_language").is(":checked") ? '(/)' :'(x)';
-  var check_cross_browsing = $("#check_cross_browsing").is(":checked") ? '(/)' :'(x)';
+  var check_metadata = $("#check_metadata").is(":checked") ? ok : fail;
+  var check_urls = $("#check_urls").is(":checked") ? ok : fail;
+  var check_images = $("#check_images").is(":checked") ? ok : fail;
+  var check_links = $("#check_links").is(":checked") ? ok : fail;
+  var check_videos = $("#check_videos").is(":checked") ? ok : fail;
+  var check_downloads = $("#check_downloads").is(":checked") ? ok : fail;
+  var check_language = $("#check_language").is(":checked") ? ok : fail;
+  var check_cross_browsing = $("#check_cross_browsing").is(":checked") ? ok : fail;
 
   // BROWSER TESTS
   var check_chrome = $("#check_chrome").is(":checked") ? 'Chrome' :'';
@@ -119,16 +123,58 @@ function pull_values_for_a_team () {
   var type = "";
   var impact_list  = [];
   var impact_value = [];
+  var check_list = [];
   var passed = $("#qa_passed").val();
+
+  // Pass and Fail Variables
+  var ok = '{color:green}OK!{color}';
+  var fail = '{color:red}Failed!{color}';
+
+  //Check template variables
+
+  var doc_template = `- Documentation explains each field, contains Content Editor section and tells which text come from universal text or product catalog `;
+  var new_page_template = `- Component verified on a new page `;
+  var universal_template = `- Universal text verified `;
+  var cta_template = `- CTA Links `;
+  var product_template = `- Product Catalog `;
+  var responsive_template = `- Responsiveness and in mobile view `;
+  var translation_template = `- Translations `;
+  var browser_template = `- All supported browsers `;
+
   // ROUTINE CHECKS
-  var check_documentation = $("#check_documentation").is(":checked") ? '{color:green}OK!{color}' :'{color:red}Failed!{color}';
-  var check_new_page = $("#check_new_page").is(":checked") ? '{color:green}OK!{color}' :'{color:red}Failed!{color}';
-  var check_universal = $("#check_universal").is(":checked") ? '{color:green}OK!{color}' :'{color:red}Failed!{color}';
-  var check_cta = $("#check_cta").is(":checked") ? '{color:green}OK!{color}' :'{color:red}Failed!{color}';
-  var check_product = $("#check_product").is(":checked") ? '{color:green}OK!{color}' :'{color:red}Failed!{color}';
-  var check_responsive = $("#check_responsive").is(":checked") ? '{color:green}OK!{color}' :'{color:red}Failed!{color}';
-  var check_translation = $("#check_translation").is(":checked") ? '{color:green}OK!{color}' :'{color:red}Failed!{color}';
-  var check_browsers = $("#check_browsers").is(":checked") ? '{color:green}OK!{color}' :'{color:red}Failed!{color}';
+  if($("#check_documentation").val()){
+    var check_documentation = $("#check_documentation").is(":checked") ? doc_template + ok : doc_template + fail;
+    check_list.push(check_documentation);
+  }
+  if($("#check_new_page").val()){
+    var check_new_page = $("#check_new_page").is(":checked") ? new_page_template + ok :new_page_template + fail;
+    check_list.push(check_new_page);
+  }
+  if($("#check_universal").val()){
+    var check_universal = $("#check_universal").is(":checked") ? universal_template + ok : universal_template + fail;
+    check_list.push(check_universal);
+  }
+  if($("#check_cta").val()){
+    var check_cta = $("#check_cta").is(":checked") ? cta_template + ok : cta_template + fail;
+    check_list.push(check_cta);
+  }
+  if($("#check_product").val()){
+    var check_product = $("#check_product").is(":checked") ? product_template + ok : product_template + fail;
+    check_list.push(check_product);
+  }
+  if($("#check_responsive").val()){
+    var check_responsive = $("#check_responsive").is(":checked") ? responsive_template + ok : responsive_template + fail;
+    check_list.push(check_responsive);
+  }
+  if($("#check_translation").val()){
+    var check_translation = $("#check_translation").is(":checked") ? translation_template + ok : translation_template + fail;
+    check_list.push(check_translation);
+  }
+  if($("#check_browsers").val()){
+    var check_browsers = $("#check_browsers").is(":checked") ? browser_template + ok : browser_template + fail;
+    check_list.push(check_browsers);
+  }
+  
   // TEXTARE VARIABLES
   var example_pages = $("#qa_example_page").val();
   var found_issues = $("#found_issues").val();
@@ -148,8 +194,7 @@ function pull_values_for_a_team () {
     impact_list.push($(this).find('input').val());
   });
 
-  generate_a_team_report(passed,check_documentation, check_new_page, check_universal, check_cta, check_product,
-    check_responsive, check_translation, check_browsers, example_pages, found_issues, a_team_note, notify, impact_list, impact_value);
+  generate_a_team_report(passed, check_list, example_pages, found_issues, a_team_note, notify, impact_list, impact_value);
 }
 
 //This function pulls the values for the release forms
@@ -370,8 +415,7 @@ function generate_bug_report(steps, current_result, expected_result, screenshot,
 }
 
 //This function takes a set of variables and creates the A-Team QA template with them.
-function generate_a_team_report(qa_passed, check_documentation, check_new_page, check_universal, check_cta, check_product,
-    check_responsive, check_translation, check_browsers, example_pages, found_issues, a_team_note, notify, impact_list, impact_value) {
+function generate_a_team_report(qa_passed, check_list, example_pages, found_issues, a_team_note, notify, impact_list, impact_value) {
     var a_team_form =
 
     `h3. Verification Results` + `\n` + ` ` + `\n` +
@@ -380,26 +424,23 @@ function generate_a_team_report(qa_passed, check_documentation, check_new_page, 
 
     `- QA Passed ` + qa_passed + `\n` + ` ` + `\n` +
 
-    `*Component*` + `\n` + ` ` + `\n` +
+    `*Component*` + `\n` + ` ` + `\n`;
 
-    `- Documentation explains each field, contains Content Editor section and tells which text come from universal text or product catalog ` + check_documentation + `\n` +
-    `- Component verified on a new page ` + check_new_page + `\n` +
-    `- Universal text verified ` + check_universal + `\n` +
-    `- CTA Links ` + check_cta + `\n` +
-    `- Product Catalog ` + check_product + `\n` +
-    `- Responsiveness and in mobile view ` + check_responsive + `\n` +
-    `- Translations ` + check_translation + `\n` +
-    `- All supported browsers ` + check_browsers +`\n` + ` ` + `\n` +
+    for ( var i = 0, l = check_list.length; i < l; i++ ) {
+      a_team_form +=  check_list[i] + `\n`;
+    }
 
+    a_team_form +=
+
+    ` ` + `\n` +
     `*Tested Impact*` + `\n` + ` ` + `\n`;
 
+      for ( var i = 0, l = impact_list.length; i < l; i++ ) {
+        a_team_form +=  `-  ` + impact_list[i] + " " + impact_value[i] + `\n`;
+      }
 
-        for ( var i = 0, l = impact_list.length; i < l; i++ ) {
-         a_team_form +=  `-  ` + impact_list[i] + " " + impact_value[i] + `\n`;
-        }
-
-      a_team_form +=
-      ` ` + `\n` +
+    a_team_form +=
+    ` ` + `\n` +
 
     `*Tested Example pages*` + `\n` +
       example_pages + `\n` + ` ` + `\n` +
@@ -580,6 +621,12 @@ function swap_converter(){
   }
 }
 
+function remove_element(){
+  $('.btn-remove-row').on('click',function () {
+        $(this).parent().remove();   
+    });
+}
+
 
 //bind event handlers
 document.addEventListener('DOMContentLoaded', init);
@@ -612,10 +659,15 @@ document.querySelector('button#add_row').addEventListener('click', add_new_redir
 document.querySelector('button#add_qa_row').addEventListener('click', add_new_add_qa_row.bind(this,'add_row'));
 
 //REFACTOR THIS LATER THROWING ERROR ON RESOLUTION
-document.querySelector('button#clear').addEventListener('click',  clear_tab);
+document.querySelector('button#clear').addEventListener('click', clear_tab);
 
-//REFACTOR THIS LATER THROWING ERROR ON RESOLUTION
-document.querySelector('button#clear_converter').addEventListener('click',  clear_converter);
+//Removes a row from the the QA-A team form.
+$('.btn-remove-row').on('click',function () {
+    $(this).parent().remove();   
+});
+
+//Restes the conversion tab to its default stage
+document.querySelector('button#clear_converter').addEventListener('click', clear_converter);
 
 document.querySelector('button#submit_resolution').addEventListener('click', pull_values_for_resolution);
 document.querySelector('button#submit_quality_assurance').addEventListener('click', pull_values_for_qa_results);
