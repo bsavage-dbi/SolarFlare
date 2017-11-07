@@ -3,8 +3,8 @@
 
   "name": "SolarFlare",
   "short_name": "SFlare",
-  "description": "This extension streamline the process of creating JIRA documentation, by developers for developers",
-  "version": "1.0.0.8",
+  "description": "This extension streamlines the process of creating JIRA documentation, by developers for developers",
+  "version": "1.0.0.9",
   "default_locale": "en",
 
   "browser_action": {
