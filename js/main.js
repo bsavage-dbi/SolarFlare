@@ -64,7 +64,7 @@ function pull_values_for_qa_results () {
   var steps = $("#qa_steps").val().split('\n');
   var results = $("#qa_results").val().split('\n');
   var note = $("#qa_note").val().split('\n') || "N/A";
-  var screenshot = $("#screenshot").val();
+  var screenshot = $("#screenshot").val().split('\n') || "N/A";
   var environment = $("#environment").val();
 
   // ROUTINE CHECKS
@@ -181,6 +181,7 @@ function pull_values_for_a_team () {
   var example_pages = $("#qa_example_page").val();
   var found_issues = $("#found_issues").val().split('\n');
   var a_team_note = $("#a_team_note").val().split('\n') || "N/A";
+  var qa_screenshot = $("#qa_screenshot").val().split('\n') || "N/A";
 
   var notify  = $('#a_team_notify').val() || [];
 
@@ -196,7 +197,7 @@ function pull_values_for_a_team () {
     impact_list.push($(this).find('input').val());
   });
 
-  generate_a_team_report(passed, check_list, example_pages, found_issues, a_team_note, notify, impact_list, impact_value);
+  generate_a_team_report(passed, check_list, example_pages, found_issues, a_team_note, notify, impact_list, impact_value, qa_screenshot);
 }
 
 //This function pulls the values for the release forms
@@ -205,7 +206,7 @@ function pull_values_for_bug () {
   var steps = $("#bug_steps").val();
   var current_result  = $("#bug_current_result").val();
   var expected_result = $("#bug_expected_result").val();
-  var screenshot = $("#bug_screenshots").val();
+  var screenshot = $("#bug_screenshots").val().split('\n');
   var notify  = $('#bug_notify').val() || [];
 
   generate_bug_report(steps, current_result, expected_result, screenshot, notify);
@@ -295,9 +296,17 @@ function generate_qa_steps(outcome, steps, results, note, screenshot, check_meta
   }
 
    qa_results += " " + "\n" +
-  "h3. Screenshots" + "\n" +
-   screenshot + "\n" + " " + "\n" +
 
+  "h3. Screenshots" + "\n";
+  if(screenshot){
+    for (var i = 0, l = screenshot.length; i < l; i++ ) {
+      screenshot[i].trim() ? qa_results += `* !` + screenshot[i] + `.png|thumbnail!` + `\n`: qa_results +=`\n`;
+    }      
+  }
+
+  qa_results += 
+
+  " " + "\n" +
   "h3. Routine Checks" + "\n" +
    "* Metadata (<title>, SiteCatalyst, description): " + check_metadata + "\n" +
    "* URLs: " + check_urls + "\n" +
@@ -449,9 +458,15 @@ function generate_bug_report(steps, current_result, expected_result, screenshot,
   `h2. {color:green}Expected Results:{color}` + `\n` +
       `# ` + expected_result + `\n` + ` ` + `\n` +
 
-  `h3. See attached Screenshots` + `\n` +
-    //`* ` + screenshot  + `\n` + ` ` + `\n` +
-      screenshot  + `\n` + ` ` + `\n` +
+  `h3. See attached Screenshots` + `\n`;
+  if(screenshot){
+    for (var i = 0, l = screenshot.length; i < l; i++ ) {
+      screenshot[i].trim() ? bug_report += `* !` + screenshot[i] + `.png|thumbnail!` + `\n`: bug_report +=`\n`;
+    }      
+  }
+ 
+    bug_report +=
+    ` ` + `\n` +
     `*FYI*`  + `\n` + ` ` + `\n` +
      notify;
 
@@ -459,7 +474,7 @@ function generate_bug_report(steps, current_result, expected_result, screenshot,
 }
 
 //This function takes a set of variables and creates the A-Team QA template with them.
-function generate_a_team_report(qa_passed, check_list, example_pages, found_issues, a_team_note, notify, impact_list, impact_value) {
+function generate_a_team_report(qa_passed, check_list, example_pages, found_issues, a_team_note, notify, impact_list, impact_value, qa_screenshot) {
     var a_team_form =
 
     `h3. Verification Results` + `\n` + ` ` + `\n` +
@@ -493,6 +508,12 @@ function generate_a_team_report(qa_passed, check_list, example_pages, found_issu
 
     for (var i = 0, l = found_issues.length; i < l; i++ ) {
       found_issues[i].trim() ? a_team_form += `- ` + found_issues[i] + `\n` : a_team_form +=`\n`;
+    }
+
+    if(qa_screenshot){
+      for (var i = 0, l = qa_screenshot.length; i < l; i++ ) {
+        qa_screenshot[i].trim() ? a_team_form += `* !` + qa_screenshot[i] + `.png|thumbnail!` + `\n`: a_team_form +=`\n`;
+      }      
     }
 
      a_team_form +=
