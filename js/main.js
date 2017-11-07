@@ -537,103 +537,112 @@ function generate_conversion(convert_input, url_format){
   var url_base = '';
   var expr_slash = /\//;
 
-  //Generates PATH 2 Author
-  if(path_to_url && url_format == 'author'){
-    $.each(convert_input, function(index, item) {
-      if(item){
-        new_url  = item.replace("/sitecore/content/", '')
-        url_base = new_url.split(/\/(.+)/)[1];
-        new_url  = new_url.replace(url_base, '')
+  // try { 
+    //PATH 2 Author
+    if(path_to_url && url_format == 'author'){
+      $.each(convert_input, function(index, item) {
+        if(item){
+          new_url  = item.replace("/sitecore/content/", '')
+          url_base = new_url.split(/\/(.+)/)[1];
+          new_url  = new_url.replace(url_base, '')
 
-        if(expr_slash.test(new_url)){
-          new_url = author_path + new_url.replace('/', '.com/');
-        }else{
-          new_url = author_path + new_url + '.com/';
-        }
-
-        new_url = new_url.toLowerCase();
-        //Check if the paths V2 syntax and act accordinly 
-        if (/swdcv2/i.test(new_url)){
-          new_url = new_url.replace('swdcv2', 'solarwinds');
-        }
-
-        url_base ? url_base = url_base.trim().replace(/\s/g, '-') : url_base = '';
-        new_url  =  new_url + url_base;
-        item_list.push(new_url);
-        }
-    });
-  }
-
-  //Generates PATH 2 Live
-  if(path_to_url && url_format == 'live'){
-    $.each(convert_input, function(index, item) {
-      if(item){
-        new_url  = item.replace("/sitecore/content/", '')
-        url_base = new_url.split(/\/(.+)/)[1];
-        new_url  = new_url.replace(url_base, '')
-
-        if(expr_slash.test(new_url)){
-          new_url = live_path + new_url.replace('/', '.com/');
-        }else{
-          new_url = live_path + new_url + '.com/';
-        }
-
-        new_url = new_url.toLowerCase();
-        //Check if the paths V2 syntax and act accordinly 
-        if (/swdcv2/i.test(new_url)){
-          new_url = new_url.replace('swdcv2', 'solarwinds');
-        }
-
-        url_base ? url_base = url_base.trim().replace(/\s/g, '-') : url_base = '';
-        new_url  =  new_url + url_base;
-        item_list.push(new_url);
-      }
-    });
-  }
-
-  //Generates AUTHOR 2 Path
-  if(!path_to_url && url_format == 'author'){
-    $.each(convert_input, function(index, item) {
-
-      if(item){
-        new_url = new URL(item);
-        //Check if the URLs contains solarwind as a hostname, if it does replace it for v2's path syntax
-        if (/solarwinds/i.test(new_url)){
-          new_url.hostname = new_url.hostname.replace('solarwinds', 'SWDCv2');
-          //If the item is a resource add the correct path containing global
-          if (/resources/i.test(new_url.pathname)){
-            new_url.hostname = new_url.hostname.replace('swdcv2', 'global');
+          if(expr_slash.test(new_url)){
+            new_url = author_path + new_url.replace('/', '.com/');
+          }else{
+            new_url = author_path + new_url + '.com/';
           }
-        }
-        if (/serv-u/i.test(new_url)){
-          new_url.hostname = new_url.hostname.replace('serv-u', 'ServU');
-        }
-        item_list.push(sc_path + new_url.host.replace(/author\.|\.com/gi, '') + new_url.pathname.replace(/-/g, ' '));
-      }
-    });
-  }
 
-  //Generates LIVE 2 Path
-  if(!path_to_url && url_format == 'live'){
-    $.each(convert_input, function(index, item) {
-      if(item){ 
-        new_url = new URL(item);
-        //Check if the URLs contains solarwind as a hostname, if it does replace it for v2's path syntax
-        if (/solarwinds/i.test(new_url)){
-          new_url.hostname = new_url.hostname.replace('solarwinds', 'SWDCv2');
-          //If the item is a resource add the correct path containing global
-          if (/resources/i.test(new_url.pathname)){
-            new_url.hostname = new_url.hostname.replace('swdcv2', 'global');
+          new_url = new_url.toLowerCase();
+          //Check if the paths V2 syntax and act accordinly 
+          if (/swdcv2/i.test(new_url)){
+            new_url = new_url.replace('swdcv2', 'solarwinds');
           }
+
+          url_base ? url_base = url_base.trim().replace(/\s/g, '-') : url_base = '';
+          new_url  =  new_url + url_base;
+          item_list.push(new_url);
+          }
+      });
+    }
+
+    //PATH 2 Live
+    if(path_to_url && url_format == 'live'){
+      $.each(convert_input, function(index, item) {
+        if(item){
+          new_url  = item.replace("/sitecore/content/", '')
+          url_base = new_url.split(/\/(.+)/)[1];
+          new_url  = new_url.replace(url_base, '')
+
+          if(expr_slash.test(new_url)){
+            new_url = live_path + new_url.replace('/', '.com/');
+          }else{
+            new_url = live_path + new_url + '.com/';
+          }
+
+          new_url = new_url.toLowerCase();
+          //Check if the paths V2 syntax and act accordinly 
+          if (/swdcv2/i.test(new_url)){
+            new_url = new_url.replace('swdcv2', 'solarwinds');
+          }
+
+          url_base ? url_base = url_base.trim().replace(/\s/g, '-') : url_base = '';
+          new_url  =  new_url + url_base;
+          item_list.push(new_url);
         }
-        if (/serv-u/i.test(new_url)){
-          new_url.hostname = new_url.hostname.replace('serv-u', 'ServU');
+      });
+    }
+
+    //AUTHOR 2 Path
+    if(!path_to_url && url_format == 'author'){
+      $.each(convert_input, function(index, item) {
+
+        if(item){
+          new_url = new URL(item);
+          //Check if the URLs contains solarwind as a hostname, if it does replace it for v2's path syntax
+          if (/solarwinds/i.test(new_url)){
+            new_url.hostname = new_url.hostname.replace('solarwinds', 'SWDCv2');
+            //If the item is a resource add the correct path containing global
+            if (/resources/i.test(new_url.pathname)){
+              new_url.hostname = new_url.hostname.replace('swdcv2', 'global');
+            }
+          }
+          if (/serv-u/i.test(new_url)){
+            new_url.hostname = new_url.hostname.replace('serv-u', 'ServU');
+          }
+          item_list.push(sc_path + new_url.host.replace(/author\.|\.com/gi, '') + new_url.pathname.replace(/-/g, ' '));
         }
-        item_list.push(sc_path + new_url.host.replace(/www\.|\.com/gi, '') + new_url.pathname.replace(/-/g, ' '));
-      }
-    });
-  }
-  
+      });
+    }
+
+    //LIVE 2 Path
+    if(!path_to_url && url_format == 'live'){
+      $.each(convert_input, function(index, item) {
+        if(item){ 
+          new_url = new URL(item);
+          //Check if the URLs contains solarwind as a hostname, if it does replace it for v2's path syntax
+          if (/solarwinds/i.test(new_url)){
+            new_url.hostname = new_url.hostname.replace('solarwinds', 'SWDCv2');
+            //If the item is a resource add the correct path containing global
+            if (/resources/i.test(new_url.pathname)){
+              new_url.hostname = new_url.hostname.replace('swdcv2', 'global');
+            }
+          }
+          if (/serv-u/i.test(new_url)){
+            new_url.hostname = new_url.hostname.replace('serv-u', 'ServU');
+          }
+          item_list.push(sc_path + new_url.host.replace(/www\.|\.com/gi, '') + new_url.pathname.replace(/-/g, ' '));
+        }
+      });
+    }
+ 
+  // catch(err) {
+  //       var msj = `Input is ` + err + `\n`;
+  //       msj += `Valid URL format is [Protocol]+[Pagename]+[Host]` + `\n`;
+  //       msj += `For example https://dameware.com/resources` + `\n`;
+  //       msj += `Valid Path format is [/sitecore/content/]+[page name]` + `\n`;
+  //       msj += `For example /sitecore/content/dameware/resources` + `\n`;  
+  //   }
+
   $.each(item_list, function(index, item) {
     plain_list += item_list[index]  + `\n`
   });
