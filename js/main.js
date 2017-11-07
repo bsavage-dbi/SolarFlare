@@ -537,84 +537,86 @@ function generate_conversion(convert_input, url_format){
   var url_base = '';
   var expr_slash = /\//;
 
-  //Generates AUTHOR URLs list from path list.
+  //Generates PATH 2 Author
   if(path_to_url && url_format == 'author'){
     $.each(convert_input, function(index, item) {
+      if(item){
+        new_url  = item.replace("/sitecore/content/", '')
+        url_base = new_url.split(/\/(.+)/)[1];
+        new_url  = new_url.replace(url_base, '')
 
-      new_url  = item.replace("/sitecore/content/", '')
-      url_base = new_url.split(/\/(.+)/)[1];
-      new_url  = new_url.replace(url_base, '')
+        if(expr_slash.test(new_url)){
+          new_url = author_path + new_url.replace('/', '.com/');
+        }else{
+          new_url = author_path + new_url + '.com/';
+        }
 
-      if(expr_slash.test(new_url)){
-        new_url = author_path + new_url.replace('/', '.com/');
-      }else{
-        new_url = author_path + new_url + '.com/';
-      }
+        new_url = new_url.toLowerCase();
+        //Check if the paths V2 syntax and act accordinly 
+        if (/swdcv2/i.test(new_url)){
+          new_url = new_url.replace('swdcv2', 'solarwinds');
+        }
 
-      new_url = new_url.toLowerCase();
-      //Check if the paths V2 syntax and act accordinly 
-      if (/swdcv2/i.test(new_url)){
-        new_url = new_url.replace('swdcv2', 'solarwinds');
-      }
-
-      url_base ? url_base = url_base.trim().replace(/\s/g, '-') : url_base = '';
-      new_url  =  new_url + url_base;
-      item_list.push(new_url);
+        url_base ? url_base = url_base.trim().replace(/\s/g, '-') : url_base = '';
+        new_url  =  new_url + url_base;
+        item_list.push(new_url);
+        }
     });
   }
 
-  //Generates LIVE URLs list from path list.
+  //Generates PATH 2 Live
   if(path_to_url && url_format == 'live'){
     $.each(convert_input, function(index, item) {
+      if(item){
+        new_url  = item.replace("/sitecore/content/", '')
+        url_base = new_url.split(/\/(.+)/)[1];
+        new_url  = new_url.replace(url_base, '')
 
-      new_url  = item.replace("/sitecore/content/", '')
-      url_base = new_url.split(/\/(.+)/)[1];
-      new_url  = new_url.replace(url_base, '')
+        if(expr_slash.test(new_url)){
+          new_url = live_path + new_url.replace('/', '.com/');
+        }else{
+          new_url = live_path + new_url + '.com/';
+        }
 
-      if(expr_slash.test(new_url)){
-        new_url = live_path + new_url.replace('/', '.com/');
-      }else{
-        new_url = live_path + new_url + '.com/';
+        new_url = new_url.toLowerCase();
+        //Check if the paths V2 syntax and act accordinly 
+        if (/swdcv2/i.test(new_url)){
+          new_url = new_url.replace('swdcv2', 'solarwinds');
+        }
+
+        url_base ? url_base = url_base.trim().replace(/\s/g, '-') : url_base = '';
+        new_url  =  new_url + url_base;
+        item_list.push(new_url);
       }
-
-      new_url = new_url.toLowerCase();
-      //Check if the paths V2 syntax and act accordinly 
-      if (/swdcv2/i.test(new_url)){
-        new_url = new_url.replace('swdcv2', 'solarwinds');
-      }
-
-      url_base ? url_base = url_base.trim().replace(/\s/g, '-') : url_base = '';
-      new_url  =  new_url + url_base;
-      item_list.push(new_url);
     });
   }
 
-  //Generates Path list from AUTHOR Urls list.
+  //Generates AUTHOR 2 Path
   if(!path_to_url && url_format == 'author'){
     $.each(convert_input, function(index, item) {
-      console.log('Path 2 author ' + item);
-      new_url = new URL(item);
 
-      //Check if the URLs contains solarwind as a hostname, if it does replace it for v2's path syntax
-      if (/solarwinds/i.test(new_url)){
-        new_url.hostname = new_url.hostname.replace('solarwinds', 'SWDCv2');
+      if(item){
+        new_url = new URL(item);
+        //Check if the URLs contains solarwind as a hostname, if it does replace it for v2's path syntax
+        if (/solarwinds/i.test(new_url)){
+          new_url.hostname = new_url.hostname.replace('solarwinds', 'SWDCv2');
+        }
+        item_list.push(sc_path + new_url.host.replace(/author\.|\.com/gi, '') + new_url.pathname.replace(/-/g, ' '));
       }
-
-      item_list.push(sc_path + new_url.host.replace(/author\.|\.com/gi, '') + new_url.pathname.replace(/-/g, ' '));
     });
   }
 
-  //Generates Path list from LIVE Urls list.
+  //Generates LIVE 2 Path
   if(!path_to_url && url_format == 'live'){
     $.each(convert_input, function(index, item) {
-      new_url = new URL(item);
-
-      //Check if the URLs contains solarwind as a hostname, if it does replace it for v2's path syntax
-      if (/solarwinds/i.test(new_url)){
-        new_url.hostname = new_url.hostname.replace('solarwinds', 'SWDCv2');
+      if(item){ 
+        new_url = new URL(item);
+        //Check if the URLs contains solarwind as a hostname, if it does replace it for v2's path syntax
+        if (/solarwinds/i.test(new_url)){
+          new_url.hostname = new_url.hostname.replace('solarwinds', 'SWDCv2');
+        }
+        item_list.push(sc_path + new_url.host.replace(/www\.|\.com/gi, '') + new_url.pathname.replace(/-/g, ' '));
       }
-
-      item_list.push(sc_path + new_url.host.replace(/www\.|\.com/gi, '') + new_url.pathname.replace(/-/g, ' '));
     });
   }
   
