@@ -600,6 +600,13 @@ function generate_conversion(convert_input, url_format){
         //Check if the URLs contains solarwind as a hostname, if it does replace it for v2's path syntax
         if (/solarwinds/i.test(new_url)){
           new_url.hostname = new_url.hostname.replace('solarwinds', 'SWDCv2');
+          //If the item is a resource add the correct path containing global
+          if (/resources/i.test(new_url.pathname)){
+            new_url.hostname = new_url.hostname.replace('swdcv2', 'global');
+          }
+        }
+        if (/serv-u/i.test(new_url)){
+          new_url.hostname = new_url.hostname.replace('serv-u', 'ServU');
         }
         item_list.push(sc_path + new_url.host.replace(/author\.|\.com/gi, '') + new_url.pathname.replace(/-/g, ' '));
       }
@@ -614,6 +621,13 @@ function generate_conversion(convert_input, url_format){
         //Check if the URLs contains solarwind as a hostname, if it does replace it for v2's path syntax
         if (/solarwinds/i.test(new_url)){
           new_url.hostname = new_url.hostname.replace('solarwinds', 'SWDCv2');
+          //If the item is a resource add the correct path containing global
+          if (/resources/i.test(new_url.pathname)){
+            new_url.hostname = new_url.hostname.replace('swdcv2', 'global');
+          }
+        }
+        if (/serv-u/i.test(new_url)){
+          new_url.hostname = new_url.hostname.replace('serv-u', 'ServU');
         }
         item_list.push(sc_path + new_url.host.replace(/www\.|\.com/gi, '') + new_url.pathname.replace(/-/g, ' '));
       }
