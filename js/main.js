@@ -25,6 +25,7 @@ var months =  [
 
 var sub_boilerplate = `Thanks for your submission!!` + `\n` +
 `We have scheduled this to be published on `;
+var operation_result = document.getElementById("feedback");
 
 function init () {
   //handle any sort of initialization code here if necessary
@@ -241,6 +242,7 @@ function pull_values_for_conversion(){
 
 //This function pushes the value of the summision string on the textarea
 function push_values_for_submission(){
+
   $('#submmision_input').val(sub_boilerplate);
 }
 
@@ -705,6 +707,7 @@ function copy_to_clipboard (text) {
 function clear_tab () {
   //var current_tab = $(this).closest(".head-div").attr("id");
   //console.log('Mr.Risseti');
+
   $(".reset").click(function() {
       $(this).closest('form').find("input[type=text], textarea").val("");
   });
@@ -772,6 +775,14 @@ function get_next_release_date(){
   return release;
 }
 
+function operation_feedback(msj, status){
+
+  status ? operation_result.className += "success" : operation_result.className += "error";
+  var text = document.createTextNode(msj);
+  operation_result.appendChild(text);
+
+
+}
 
 //bind event handlers
 document.addEventListener('DOMContentLoaded', init);
