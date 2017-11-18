@@ -424,8 +424,11 @@ function generate_redirect_forms(platform, policy, redirect_version, notify, not
     //     i += 1;
     // }
 
+
     for (var i = 0, l = redirect_origin.length; i < l; i++ ) {
-      redirect_form += `| ` + redirect_origin[i] + ` | ` + redirect_destiny[i] + ` |`  + `\n`;
+      if(redirect_origin[i]){ 
+        redirect_form += `| ` + redirect_origin[i] + ` | ` + redirect_destiny[i] + ` |`  + `\n`;
+      }
     }
 
     redirect_form += 
@@ -433,7 +436,9 @@ function generate_redirect_forms(platform, policy, redirect_version, notify, not
     `h4. {color:red}Notes{color}`  + `\n`;
  
     for (var i = 0, l = note.length; i < l; i++ ) {
-      note[i].trim() ? redirect_form += `* ` + note[i] + `\n` : redirect_form +=`\n`;
+      if(redirect_destiny[i]){ 
+        note[i].trim() ? redirect_form += `* ` + note[i] + `\n` : redirect_form +=`\n`;
+      }
     }
 
     redirect_form += 

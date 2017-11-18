@@ -9,6 +9,9 @@
         <!-- javascript -->
     <script type="text/javascript" src="../js/jquery-3.2.1.slim.min.js"></script>
     <script type="text/javascript" src="../js/bootstrap.min.js"></script>
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <link rel="icon" href="../images/icon.png">
+    <title>SolarFlare</title>
   </head>
 
 <body>
@@ -22,8 +25,11 @@
   <button class="tablinks" id="qa_verification_tab">A Team Test</button>
   <button class="tablinks" id="bug_report_tab">Bug Report</button>
   <button class="tablinks" id="path_converter_tab">Converter</button>
+  <button class="tablinks" id="submission_tab">Submission</button>
+  <form action="https://cp.solarwinds.com/display/WCT/SolarFlare">
+    <button type="submit" class="tablinks" id="doc_tab" formtarget="_blank">Documentation</button>
+  </form>
 </div>
-
 
 <!-- Resolution Tab -->
 <div id="resolution_tab_content" class="tabcontent">
@@ -35,8 +41,8 @@
 
   <!-- Select Basic -->
   <div class="form-group">
-    <label class="col-md-4 control-label" for="action">Action</label>
-    <div class="col-md-4">
+    <label class="col-md-12 control-label" for="action">Action</label>
+    <div class="col-md-12">
       <select id="action" name="action" class="form-control">
         <option value="Created">Created</option>
         <option value="Updated">Updated</option>
@@ -47,62 +53,66 @@
 
   <!-- Text input-->
   <div class="form-group">
-    <label class="col-md-4 control-label" for="task">Description</label>
-    <div class="col-md-4">
+    <label class="col-md-12 control-label" for="task">Description</label>
+    <div class="col-md-12">
     <input id="task" name="task" type="text" placeholder="Short description of action/task" class="form-control input-md">
     </div>
   </div>
 
   <!-- Textarea -->
   <div class="form-group">
-    <label class="col-md-4 control-label" for="note">Note(s)</label>
-    <div class="col-md-4">
+    <label class="col-md-12 control-label" for="note">Note(s)</label>
+    <div class="col-md-12">
       <textarea class="form-control" id="note" name="note" placeholder="Any relevant observations goes here"></textarea>
     </div>
   </div>
 
   <!-- Textarea -->
   <div class="form-group">
-    <label class="col-md-4 control-label" for="steps">Step(s)</label>
-    <div class="col-md-4">
+    <label class="col-md-12 control-label" for="steps">Step(s)</label>
+    <div class="col-md-12">
       <textarea class="form-control" id="steps" name="steps" placeholder="Enter a new line for each step"></textarea>
     </div>
   </div>
 
   <!-- Textarea -->
   <div class="form-group">
-    <label class="col-md-4 control-label" for="paths">Path(s)</label>
-    <div class="col-md-4">
+    <label class="col-md-12 control-label" for="paths">Path(s)</label>
+    <div class="col-md-12">
       <textarea class="form-control" id="paths" name="paths" placeholder="Paths to be submitted, one per line"></textarea>
     </div>
   </div>
 
   <!-- Textarea -->
   <div class="form-group">
-    <label class="col-md-4 control-label" for="substep">Affected</label>
-    <div class="col-md-4">
+    <label class="col-md-12 control-label" for="substep">Affected</label>
+    <div class="col-md-12">
       <textarea class="form-control" id="subpath" name="substep" placeholder="Paths also affected, one per line"></textarea>
     </div>
   </div>
 
   <!-- Select Multiple -->
   <div class="form-group">
-    <label class="col-md-4 control-label" for="notify">Notify</label>
-    <div class="col-md-4">
+    <label class="col-md-12 control-label" for="notify">Notify</label>
+    <div class="col-md-12">
       <select id="notify" name="notify" class="form-control" multiple="multiple">
         <option value="[~vivian.chollette]">Vivian Chollette</option>
         <option value="[~juan.jaramillo]">Juan Jaramillo</option>
         <option value="[~lashanna.martin-wood]">Lashanna Martin-Wood</option>
         <option value="[~todd.huoni]">Todd Huoni</option>
         <option value="[~rachel.morrill]">Rachel Morrill</option>
+        <option value="[~kaylee.campbell]">Kaylee Campbell</option>
+        <option value="[~angela.chenuau]">Angela Chenuau</option>
+        <option value="[~alicia.hillman]">Alicia Hillman</option>
+        <option value="[~josh.berman]">Josh Berman</option>
       </select>
     </div>
   </div>
 
   <!-- Button (Double) -->
   <div class="form-group">
-    <label class="col-md-4 control-label"></label>
-    <div class="col-md-6">
+    <label class="col-md-12 control-label"></label>
+    <div class="col-md-12">
       <button id="submit_resolution" name="submit" class="btn btn-success" type="button">Create</button>
       <button id="clear" name="clear" class="btn btn-warning">Clear</button>
     </div>
@@ -123,8 +133,8 @@
 
   <!-- Select Basic -->
   <div class="form-group">
-    <label class="col-md-4 control-label" for="selectbasic">Outcome</label>
-    <div class="col-md-4">
+    <label class="col-md-12 control-label" for="selectbasic">Outcome</label>
+    <div class="col-md-12">
       <select id="outcome" name="selectbasic" class="form-control">
         <option value="(/) PASSED">(/) Passed</option>
         <option value="(!) INCOMPLETE">(!) Incomplete</option>
@@ -135,39 +145,39 @@
 
   <!-- Textarea -->
   <div class="form-group">
-    <label class="col-md-4 control-label" for="qa_steps">Replication Steps</label>
-    <div class="col-md-4">
+    <label class="col-md-12 control-label" for="qa_steps">Replication Steps</label>
+    <div class="col-md-12">
       <textarea class="form-control" id="qa_steps" name="qa_steps" placeholder="Substep or note"></textarea>
     </div>
   </div>
 
   <!-- Textarea -->
   <div class="form-group">
-    <label class="col-md-4 control-label" for="qa_results">Results</label>
-    <div class="col-md-4">
+    <label class="col-md-12 control-label" for="qa_results">Results</label>
+    <div class="col-md-12">
       <textarea class="form-control" id="qa_results" name="qa_results" placeholder="Results"></textarea>
     </div>
   </div>
 
   <!-- Textarea -->
   <div class="form-group">
-    <label class="col-md-4 control-label" for="qa_note">Note(s)</label>
-    <div class="col-md-4">
+    <label class="col-md-12 control-label" for="qa_note">Note(s)</label>
+    <div class="col-md-12">
       <textarea class="form-control" id="qa_note" name="qa_note"  placeholder="Any relevant observations goes here"></textarea>
     </div>
   </div>
 
   <!-- Textarea -->
   <div class="form-group">
-    <label class="col-md-4 control-label" for="screenshot">Screenshots</label>
-    <div class="col-md-4"><textarea class="form-control" id="screenshot" name="screenshot" placeholder="Insert each image on a new line"></textarea>
+    <label class="col-md-12 control-label" for="screenshot">Screenshots</label>
+    <div class="col-md-12"><textarea class="form-control" id="screenshot" name="screenshot" placeholder="Insert each image on a new line"></textarea>
     </div>
   </div>
 
   <!-- Multiple Checkboxes -->
   <div class="form-group">
-    <label class="col-md-4 control-label" for="routine_checks">Routine Checks</label>
-    <div class="col-md-4">
+    <label class="col-md-12 control-label" for="routine_checks">Routine Checks</label>
+    <div class="col-md-12">
     <div class="checkbox">
       <label for="routine_checks-0">
         <input type="checkbox" name="routine_checks" id="check_metadata" checked="checked">
@@ -221,8 +231,8 @@
 
   <!-- Select Basic -->
   <div class="form-group">
-    <label class="col-md-4 control-label" for="environment">Environment</label>
-    <div class="col-md-4">
+    <label class="col-md-12 control-label" for="environment">Environment</label>
+    <div class="col-md-12">
       <select id="environment" name="environment" class="form-control">
         <option value="Tested on Author">Tested on Author</option>
         <option value="Tested on Live">Tested on Live</option>
@@ -233,8 +243,8 @@
 
   <!-- Multiple Checkboxes -->
   <div class="form-group">
-    <label class="col-md-4 control-label" for="browsers_tested">Browsers tested</label>
-    <div class="col-md-4">
+    <label class="col-md-12 control-label" for="browsers_tested">Browsers tested</label>
+    <div class="col-md-12">
     <div class="checkbox">
       <label for="browsers_tested-0">
         <input type="checkbox" name="browsers_tested" id="check_chrome" checked="checked">
@@ -258,8 +268,8 @@
 
   <!-- Select Multiple -->
   <div class="form-group">
-    <label class="col-md-4 control-label" for="qa_notify">Notify</label>
-    <div class="col-md-4">
+    <label class="col-md-12 control-label" for="qa_notify">Notify</label>
+    <div class="col-md-12">
       <select id="qa_notify" name="qa_notify" class="form-control" multiple="multiple">
         <option value="[~vivian.chollette]">Vivian Chollette</option>
         <option value="[~jean.maradiaga]">Jean Maradiaga</option>
@@ -271,14 +281,19 @@
         <option value="[~luis.corrales]">Luis Corrales</option>
         <option value="[~todd.huoni]">Todd Huoni</option>
         <option value="[~lashanna.martin-wood]">Lashanna Martin-Wood</option>
+        <option value="[~kaylee.campbell]">Kaylee Campbell</option>
+        <option value="[~angela.chenuau]">Angela Chenuau</option>
+        <option value="[~alicia.hillman]">Alicia Hillman</option>
+        <option value="[~rachel.morrill]">Rachel Morrill</option>
+        <option value="[~josh.berman]">Josh Berman</option>
       </select>
     </div>
   </div>
 
     <!-- Button (Double) -->
     <div class="form-group">
-      <label class="col-md-4 control-label"></label>
-      <div class="col-md-6">
+      <label class="col-md-12 control-label"></label>
+      <div class="col-md-12">
         <button id="submit_quality_assurance" name="submit" class="btn btn-success" type="button">Create</button>
         <button id="clear" name="clear" class="btn btn-warning">Clear</button>
       </div>
@@ -297,16 +312,16 @@
     <legend align="center">Release Forms</legend>
       <!-- Textarea -->
       <div class="form-group">
-        <label class="col-md-4 control-label" for="release_input">Item(s)</label>
-        <div class="col-md-4">
+        <label class="col-md-12 control-label" for="release_input">Item(s)</label>
+        <div class="col-md-12">
           <textarea class="form-control" id="release_input" name="release_input" placeholder="SC Paths/URLs/Notes"></textarea>
         </div>
       </div>
 
       <!-- Select Multiple -->
       <div class="form-group">
-        <label class="col-md-4 control-label" for="release_notify">Notify</label>
-        <div class="col-md-4">
+        <label class="col-md-12 control-label" for="release_notify">Notify</label>
+        <div class="col-md-12">
           <select id="release_notify" name="release_notify" class="form-control" multiple="multiple">
             <option value="[~vivian.chollette]">Vivian Chollette</option>
             <option value="[~jean.maradiaga]">Jean Maradiaga</option>
@@ -318,14 +333,19 @@
             <option value="[~luis.corrales]">Luis Corrales</option>
             <option value="[~todd.huoni]">Todd Huoni</option>
             <option value="[~lashanna.martin-wood]">Lashanna Martin-Wood</option>
+            <option value="[~kaylee.campbell]">Kaylee Campbell</option>
+            <option value="[~angela.chenuau]">Angela Chenuau</option>
+            <option value="[~alicia.hillman]">Alicia Hillman</option>
+            <option value="[~rachel.morrill]">Rachel Morrill</option>
+            <option value="[~josh.berman]">Josh Berman</option>
           </select>
         </div>
       </div>
 
       <!-- Multiple Radios -->
       <div class="form-group">
-        <label class="col-md-4 control-label" for="release_radios">Form for</label>
-        <div class="col-md-4">
+        <label class="col-md-12 control-label" for="release_radios">Form for</label>
+        <div class="col-md-12">
           <div class="radio">
             <label for="release_radios-0">
             <input type="radio" name="release_radios" id="workbox" value="is_work" checked="checked">
@@ -355,8 +375,8 @@
 
       <!-- Button (Double) -->
       <div class="form-group">
-        <label class="col-md-4 control-label"></label>
-        <div class="col-md-6">
+        <label class="col-md-12 control-label"></label>
+        <div class="col-md-12">
           <button id="submit_release_form" name="submit" class="btn btn-success" type="button">Create</button>
           <button id="clear" name="clear" class="btn btn-warning">Clear</button>
         </div>
@@ -378,8 +398,8 @@
 
   <!-- Select Basic -->
   <div class="form-group">
-    <label class="col-md-4 control-label" for="redirect_platform">Platform</label>
-    <div class="col-md-4">
+    <label class="col-md-12 control-label" for="redirect_platform">Platform</label>
+    <div class="col-md-12">
       <select id="redirect_platform" name="redirect_plataform" class="form-control">
         <option value="Akamai">Akamai</option>
         <option value="Web Admin Tool">Web Admin Tool</option>
@@ -389,8 +409,8 @@
 
   <!-- Select Multiple -->
   <div class="form-group">
-    <label class="col-md-4 control-label" for="policy_name">Policy Name</label>
-      <div class="col-md-4">
+    <label class="col-md-12 control-label" for="policy_name">Policy Name</label>
+      <div class="col-md-12">
         <select id="policy_name" name="policy_name" class="form-control">
           <option value="ER_Webhelpdesk">Web Help Desk</option>
           <option value="ER_SolarWinds1">SolarWinds v.1</option>
@@ -404,8 +424,8 @@
 
   <!-- Prepended text-->
   <div class="form-group">
-    <label class="col-md-4 control-label" for="prependedtext">Version</label>
-    <div class="col-md-4">
+    <label class="col-md-12 control-label" for="prependedtext">Version</label>
+    <div class="col-md-12">
       <div class="input-group">
         <span class="input-group-addon">ver.</span>
         <input id="redirect_version" name="prependedtext" class="form-control" placeholder="Appended on creation like ER_SolarWinds1 v158" type="text">
@@ -415,46 +435,50 @@
 
   <!-- TO list -->
   <div class="form-group">
-    <label class="col-md-4 control-label" for="redirect_origin">Origin URL(s)</label>
-    <div class="col-md-4">
+    <label class="col-md-12 control-label" for="redirect_origin">Origin URL(s)</label>
+    <div class="col-md-12">
       <textarea class="form-control redirect_list" id="redirect_origin" name="redirect_origin" placeholder="Enter a list of URLs to be redirected, we will match them with the destination list 1:1 so make sure to input the same amount in the same order"></textarea>
     </div>
   </div>
 
   <!-- From list -->
   <div class="form-group">
-    <label class="col-md-4 control-label" for="redirect_destiny">Destination URL(s)</label>
-    <div class="col-md-4">
+    <label class="col-md-12 control-label" for="redirect_destiny">Destination URL(s)</label>
+    <div class="col-md-12">
       <textarea class="form-control redirect_list" id="redirect_destiny" name="redirect_destiny" placeholder="Enter a list of destination URLs, we will match them with the origin list 1:1 so make sure to input the same amount in the same order"></textarea>
     </div>
   </div>
 
   <!-- Textarea -->
   <div class="form-group">
-    <label class="col-md-4 control-label" for="redirect_notes">Note(s)</label>
-    <div class="col-md-4">
+    <label class="col-md-12 control-label" for="redirect_notes">Note(s)</label>
+    <div class="col-md-12">
       <textarea class="form-control" id="redirect_notes" name="redirect_notes"  placeholder="Any relevant observations goes here"></textarea>
     </div>
   </div>
 
     <!-- Select Multiple -->
     <div class="form-group">
-      <label class="col-md-4 control-label" for="qa_notify">Notify</label>
-      <div class="col-md-4">
+      <label class="col-md-12 control-label" for="qa_notify">Notify</label>
+      <div class="col-md-12">
         <select id="redirect_notify" name="qa_notify" class="form-control" multiple="multiple">
           <option value="[~vivian.chollette]">Vivian Chollette</option>
           <option value="[~lashanna.martin-wood]">Lashanna Martin-Wood</option>
           <option value="[~todd.huoni]">Todd Huoni</option>
           <option value="[~rachel.morrill]">Rachel Morrill</option>
           <option value="[~luis.corrales]">Luis Corrales</option>
+          <option value="[~kaylee.campbell]">Kaylee Campbell</option>
+          <option value="[~angela.chenuau]">Angela Chenuau</option>
+          <option value="[~alicia.hillman]">Alicia Hillman</option>
+          <option value="[~josh.berman]">Josh Berman</option>
         </select>
       </div>
     </div>
 
   <!-- Button (Double) -->
   <div class="form-group">
-    <label class="col-md-4 control-label"></label>
-      <div class="col-md-6">
+    <label class="col-md-12 control-label"></label>
+      <div class="col-md-12">
         <button id="submit_redirect_form" name="submit" class="btn btn-success" type="button">Create</button>
         <button id="clear" name="clear" class="btn btn-warning">Clear</button>
     </div>
@@ -475,8 +499,8 @@
 
     <!-- Select Basic -->
     <div class="form-group">
-      <label class="col-md-4 control-label" for="qa_passed">QA Passed</label>
-      <div class="col-md-4">
+      <label class="col-md-12 control-label" for="qa_passed">QA Passed</label>
+      <div class="col-md-12">
         <select id="qa_passed" name="qa_passed" class="form-control">
           <option value="{color:green}OK!{color}">Yes</option>
           <option value="{color:red}Failed!{color}">No</option>
@@ -486,8 +510,8 @@
 
     <!-- Multiple Checkboxes -->
     <div class="form-group">
-      <label class="col-md-4 control-label" for="qa_component_test">Component</label>
-      <div class="col-md-4">
+      <label class="col-md-12 control-label" for="qa_component_test">Component</label>
+      <div class="col-md-12">
       <div class="checkbox">
         <label for="qa_component_test-0">
           <input type="checkbox" name="qa_component_test" id="check_documentation" checked="checked">
@@ -566,7 +590,7 @@
       </div>
 
       <div class="form-group">
-          <div class="col-md-6">
+          <div class="col-md-12">
             <button id="add_qa_row" name="submit" class="btn btn-primary" type="button">+</button>
         </div>
       </div>
@@ -574,40 +598,40 @@
 
     <!-- Textarea -->
     <div class="form-group">
-      <label class="col-md-4 control-label" for="qa_example_page">Tested Example pages</label>
-      <div class="col-md-4">
+      <label class="col-md-12 control-label" for="qa_example_page">Tested Example pages</label>
+      <div class="col-md-12">
         <textarea class="form-control" id="qa_example_page" name="qa_example_page" placeholder="Tested pages URLs"></textarea>
       </div>
     </div>
 
     <!-- Textarea -->
     <div class="form-group">
-      <label class="col-md-4 control-label" for="found_issues">Found Issues</label>
-      <div class="col-md-4">
+      <label class="col-md-12 control-label" for="found_issues">Found Issues</label>
+      <div class="col-md-12">
         <textarea class="form-control" id="found_issues" name="found_issues" placeholder="In topic pages there is a reponsive issue in ipad view."></textarea>
       </div>
     </div>
 
     <!-- Textarea -->
     <div class="form-group">
-      <label class="col-md-4 control-label" for="qa_screenshot">Screenshots</label>
-      <div class="col-md-4">
+      <label class="col-md-12 control-label" for="qa_screenshot">Screenshots</label>
+      <div class="col-md-12">
         <textarea class="form-control" id="qa_screenshot" name="qa_screenshot" placeholder="Insert each image name in a new line"></textarea>
       </div>
     </div>
 
     <!-- Textarea -->
     <div class="form-group">
-      <label class="col-md-4 control-label" for="a_team_note">Note(s)</label>
-      <div class="col-md-4">
+      <label class="col-md-12 control-label" for="a_team_note">Note(s)</label>
+      <div class="col-md-12">
         <textarea class="form-control" id="a_team_note" name="a_team_note" placeholder="Ready for UAT."></textarea>
       </div>
     </div>
 
     <!-- Select Multiple -->
     <div class="form-group">
-      <label class="col-md-4 control-label" for="a_team_notify">Notify</label>
-      <div class="col-md-4">
+      <label class="col-md-12 control-label" for="a_team_notify">Notify</label>
+      <div class="col-md-12">
         <select id="a_team_notify" name="a_team_notify" class="form-control" multiple="multiple">
           <option value="[~martin.novak]">Martin Novak</option>
           <option value="[~Ilia.Dimitrov]">Ilia Dimitrov</option>
@@ -620,14 +644,18 @@
           <option value="[~kacy.hulme]">Kacy Hulme</option>
           <option value="[~andrea.barto]">Andrea Barto</option>
           <option value="[~rachel.morrill]">Rachel Morrill</option>
+          <option value="[~kaylee.campbell]">Kaylee Campbell</option>
+          <option value="[~angela.chenuau]">Angela Chenuau</option>
+          <option value="[~alicia.hillman]">Alicia Hillman</option>
+          <option value="[~josh.berman]">Josh Berman</option>
         </select>
       </div>
     </div>
 
     <!-- Button (Double) -->
     <div class="form-group">
-      <label class="col-md-4 control-label"></label>
-        <div class="col-md-6">
+      <label class="col-md-12 control-label"></label>
+        <div class="col-md-12">
           <button id="submit_a_team_qa" name="submit" class="btn btn-success" type="button">Create</button>
           <button id="clear" name="clear" class="btn btn-warning">Clear</button>
       </div>
@@ -648,40 +676,40 @@
 
     <!-- Textarea -->
     <div class="form-group">
-      <label class="col-md-4 control-label" for="a_team_steps">Step(s)</label>
-      <div class="col-md-4">
+      <label class="col-md-12 control-label" for="a_team_steps">Step(s)</label>
+      <div class="col-md-12">
         <textarea class="form-control" id="bug_steps" name="a_team_steps" placeholder="Enter a new line for each step"></textarea>
       </div>
     </div>
 
     <!-- Textarea -->
     <div class="form-group">
-      <label class="col-md-4 control-label" for="bug_current_result">Current Results</label>
-      <div class="col-md-4">
+      <label class="col-md-12 control-label" for="bug_current_result">Current Results</label>
+      <div class="col-md-12">
         <textarea class="form-control" id="bug_current_result" name="bug_current_result" placeholder="Current result when following the steps above"></textarea>
       </div>
     </div>
 
     <!-- Textarea -->
     <div class="form-group">
-      <label class="col-md-4 control-label" for="bug_expected_result">Expected Results</label>
-      <div class="col-md-4">
+      <label class="col-md-12 control-label" for="bug_expected_result">Expected Results</label>
+      <div class="col-md-12">
         <textarea class="form-control" id="bug_expected_result" name="bug_expected_result" placeholder="Expected result when following the testing steps"></textarea>
       </div>
     </div>
 
     <!-- Textarea -->
     <div class="form-group">
-      <label class="col-md-4 control-label" for="bug_screenshots">Screenshots</label>
-      <div class="col-md-4">
+      <label class="col-md-12 control-label" for="bug_screenshots">Screenshots</label>
+      <div class="col-md-12">
         <textarea class="form-control" id="bug_screenshots" name="a_team_screenshots"  placeholder="Insert each image name in a new line"></textarea>
       </div>
     </div>
 
     <!-- Select Multiple -->
     <div class="form-group">
-      <label class="col-md-4 control-label" for="bug_notify">Notify</label>
-      <div class="col-md-4">
+      <label class="col-md-12 control-label" for="bug_notify">Notify</label>
+      <div class="col-md-12">
         <select id="bug_notify" name="bug_notify" class="form-control" multiple="multiple">
           <option value="[~martin.novak]">Martin Novak</option>
           <option value="[~Ilia.Dimitrov]">Ilia Dimitrov</option>
@@ -695,14 +723,15 @@
           <option value="[~kacy.hulme]">Kacy Hulme</option>
           <option value="[~andrea.barto]">Andrea Barto</option>
           <option value="[~rachel.morrill]">Rachel Morrill</option>
+          <option value="[~angela.chenuau]">Angela Chenuau</option>
         </select>
       </div>
     </div>
 
     <!-- Button (Double) -->
     <div class="form-group">
-      <label class="col-md-4 control-label"></label>
-        <div class="col-md-6">
+      <label class="col-md-12 control-label"></label>
+        <div class="col-md-12">
           <button id="submit_bug_report" name="submit" class="btn btn-success" type="button">Create</button>
           <button id="clear" name="clear" class="btn btn-warning">Clear</button>
       </div>
@@ -723,16 +752,16 @@
 
     <!-- Textarea -->
     <div class="form-group">
-      <label class="col-md-4 control-label" for="convert_input">Input Path(s)</label>
-      <div class="col-md-4">                     
+      <label class="col-md-12 control-label" for="convert_input">Input Path(s)</label>
+      <div class="col-md-12">                     
         <textarea class="form-control" id="convert_input" name="convert_input" placeholder="Paths or URLs go here"></textarea>
       </div>
     </div>
 
       <!-- Multiple Radios -->
       <div class="form-group">
-        <label class="col-md-4 control-label" for="converter_radios">URL format</label>
-        <div class="col-md-4">
+        <label class="col-md-12 control-label" for="converter_radios">URL format</label>
+        <div class="col-md-12">
           <div class="radio">
             <label for="converter_radios-0">
             <input type="radio" name="converter_radios" id="author" value="author" checked="checked">
@@ -750,7 +779,7 @@
 
     <!-- Button (Double) -->
     <div class="form-group">
-        <div class="col-md-6">
+        <div class="col-md-12">
           <button id="submit_path_convert" name="submit" class="btn btn-success" type="button">Convert</button>
           <button id="clear_converter" name="clear" class="btn btn-warning">Clear</button>
           <button id="swap_converter" name="swap" class="btn btn-swap">Swap</button>
@@ -760,6 +789,7 @@
     </fieldset>
   </form>
 </div>
+<!-- End Converter tab -->
 
   <!-- load javascript: unique html page javascript file -->
   <script type="text/javascript" src="../js/main.js"></script>
