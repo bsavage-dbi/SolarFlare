@@ -7,10 +7,29 @@ var path_to_url = true;
 var sc_path = `/sitecore/content/`;
 var author_path = `http://author.`;
 var live_path = `https://www.`;
+var content_release;
+var months =  [
+  'January',
+  'February',
+  'March',
+  'April',
+  'May',
+  'June',
+  'July',
+  'August',
+  'September',
+  'October',
+  'November',
+  'December'
+];
+
+var sub_boilerplate = `Thanks for your submission!!` + `\n` +
+`We have scheduled this to be published on `;
 
 function init () {
   //handle any sort of initialization code here if necessary
   $("#resolution_tab").trigger('click');
+  sub_boilerplate += get_next_release_date() + `.`;
 }
 
 // This functions handles the tabs and content within
@@ -218,6 +237,17 @@ function pull_values_for_conversion(){
   var url_format = $("input:radio[name='converter_radios']:checked").val();
   
   generate_conversion(convert_input, url_format);
+}
+
+//This function pushes the value of the summision string on the textarea
+function push_values_for_submission(){
+  $('#submmision_input').val(sub_boilerplate);
+}
+
+//This function pulls the values for the submission
+function pull_values_for_submission(){
+  var submission = $('#submmision_input').val();
+  generate_submission(submission);
 }
 
 //This function takes a set of variables and creates the JIRA resolution steps with them.
@@ -655,6 +685,12 @@ function generate_conversion(convert_input, url_format){
   copy_to_clipboard(plain_list);
 }
 
+//This function generates the thank-you bla, bla bla text the PM uses.
+function generate_submission(boilerplate){
+  var submission = `{noformat}` + boilerplate + `{noformat}`;
+  copy_to_clipboard(submission);
+}
+
 //This function copies a text result from the generate_ functions to the user's clipboard.
 function copy_to_clipboard (text) {
 
@@ -729,6 +765,13 @@ function remove_element(){
     });
 }
 
+function get_next_release_date(){
+
+  var date = Date.parse('next thursday');
+  var release = (months[date.getMonth()]) + " " + (date.getDate());
+  return release;
+}
+
 
 //bind event handlers
 document.addEventListener('DOMContentLoaded', init);
@@ -751,8 +794,17 @@ document.querySelector('button#qa_verification_tab').addEventListener('click', o
 //binds event to Bug Report tab click
 document.querySelector('button#bug_report_tab').addEventListener('click', open_tab.bind(this,'bug_report_tab'));
 
-//binds event to Bug Report tab click
+//binds event to Converter tab click
 document.querySelector('button#path_converter_tab').addEventListener('click', open_tab.bind(this,'path_converter_tab'));
+
+//binds event to Submission tab click
+document.querySelector('button#submission_tab').addEventListener('click', open_tab.bind(this,'submission_tab'));
+
+//binds event to Submission tab click
+document.querySelector('button#submission_tab').addEventListener('click', push_values_for_submission);
+
+
+
 
 //binds event to add new row button click
 //document.querySelector('button#add_row').addEventListener('click', add_new_redirect_row.bind(this,'add_row'));
@@ -779,3 +831,4 @@ document.querySelector('button#submit_bug_report').addEventListener('click', pul
 document.querySelector('button#submit_a_team_qa').addEventListener('click', pull_values_for_a_team);
 document.querySelector('button#submit_path_convert').addEventListener('click', pull_values_for_conversion);
 document.querySelector('button#swap_converter').addEventListener('click', swap_converter);
+document.querySelector('button#submit_submission').addEventListener('click', pull_values_for_submission);

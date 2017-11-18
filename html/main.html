@@ -9,6 +9,7 @@
         <!-- javascript -->
     <script type="text/javascript" src="../js/jquery-3.2.1.slim.min.js"></script>
     <script type="text/javascript" src="../js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="../js/date.js"></script>
     <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
     <link rel="icon" href="../images/icon.png">
     <title>SolarFlare</title>
@@ -27,7 +28,7 @@
   <button class="tablinks" id="path_converter_tab">Converter</button>
   <button class="tablinks" id="submission_tab">Submission</button>
   <form action="https://cp.solarwinds.com/display/WCT/SolarFlare">
-    <button type="submit" class="tablinks" id="doc_tab" formtarget="_blank">Documentation</button>
+    <button type="submit" class="tablinks doc" id="doc_tab" formtarget="_blank">Documentation</button>
   </form>
 </div>
 
@@ -790,6 +791,36 @@
   </form>
 </div>
 <!-- End Converter tab -->
+
+<!-- Converter Tab -->
+<div id="submission_tab_content" class="tabcontent">
+  <form class="form-horizontal">
+    <fieldset>
+
+    <!-- REDIRECT Name -->
+    <legend align="center" id="submission_name">Submission Boilerplate</legend>
+
+    <!-- Textarea -->
+    <div class="form-group">
+      <label class="col-md-12 control-label" for="submmision_input">Ticket go live each Thursday </label>
+      <div class="col-md-12">                     
+        <textarea class="form-control" id="submmision_input" name="submmision_input" placeholder="You can edit this text, press convert to copy to your clipboard or clear to reset it to next the Thursday's date."></textarea>
+      </div>
+    </div>
+
+    <!-- Button (Double) -->
+    <div class="form-group">
+        <div class="col-md-12">
+          <button id="submit_submission" name="submit" class="btn btn-success" type="button">Create</button>
+          <button id="clear" name="clear" class="btn btn-warning">Clear</button>
+      </div>
+    </div>
+
+    </fieldset>
+  </form>
+</div>
+<!-- End Converter tab -->
+
 
   <!-- load javascript: unique html page javascript file -->
   <script type="text/javascript" src="../js/main.js"></script>

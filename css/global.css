@@ -42,6 +42,11 @@ div.tab button {
     font-weight: 500;
 }
 
+/* Style the buttons inside the tab */
+#doc_tab {
+    color: #e6e97b;
+}
+
 /* Change background color of buttons on hover */
 div.tab button:hover {
     /*background-color: #ddd;*/

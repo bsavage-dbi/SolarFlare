@@ -102,3 +102,8 @@
 .redirect_list {
   height: 90px;
 }
+
+/*Sets the submission textarea's height*/
+#submmision_input{
+  height: 100px;
+}
