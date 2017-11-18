@@ -36,6 +36,7 @@ function init () {
 // This functions handles the tabs and content within
 function open_tab(tabName) {
 
+    clean_feeback()
     // Declare all variables
     var i, tabcontent, tablinks;
     var content = tabName + "_content";
@@ -574,7 +575,6 @@ function generate_conversion(convert_input, url_format){
   var url_base = '';
   var expr_slash = /\//;
 
-  // try { 
     //PATH 2 Author
     if(path_to_url && url_format == 'author'){
       $.each(convert_input, function(index, item) {
@@ -672,14 +672,6 @@ function generate_conversion(convert_input, url_format){
       });
     }
  
-  // catch(err) {
-  //       var msj = `Input is ` + err + `\n`;
-  //       msj += `Valid URL format is [Protocol]+[Pagename]+[Host]` + `\n`;
-  //       msj += `For example https://dameware.com/resources` + `\n`;
-  //       msj += `Valid Path format is [/sitecore/content/]+[page name]` + `\n`;
-  //       msj += `For example /sitecore/content/dameware/resources` + `\n`;  
-  //   }
-
   $.each(item_list, function(index, item) {
     plain_list += item_list[index]  + `\n`
   });
@@ -701,13 +693,17 @@ function copy_to_clipboard (text) {
   var dummy = $('<textarea>').val(text).appendTo('body').select()
   document.execCommand('copy')
   dummy.remove();
+
+  msj = `The result has been copied to your clipboard!` + `\n` +
+        `Not what you expected? Check the values on the inputs or raise your hand and I'll take a look`;
+
+  operation_feedback(msj, true);
 }
 
 //This function resets the forms and sends the user back to the resolution form
 function clear_tab () {
   //var current_tab = $(this).closest(".head-div").attr("id");
   //console.log('Mr.Risseti');
-
   $(".reset").click(function() {
       $(this).closest('form').find("input[type=text], textarea").val("");
   });
@@ -777,15 +773,35 @@ function get_next_release_date(){
 
 function operation_feedback(msj, status){
 
+  clean_feeback()
   status ? operation_result.className += "success" : operation_result.className += "error";
-  var text = document.createTextNode(msj);
-  operation_result.appendChild(text);
-
-
+  operation_result.innerHTML = msj;
 }
+
+function clean_feeback(){
+  operation_result.className = '';
+  operation_result.innerHTML = '';
+}
+
 
 //bind event handlers
 document.addEventListener('DOMContentLoaded', init);
+
+//This event handler catches errors within any executing context. Error events get fired from various targets for any kind of error. 
+window.addEventListener('error', function (e) {
+  var stack = e.error.stack;
+  var message = e.error.toString();
+
+  //console.log('did you cath that?' + stack);
+
+  if (stack) {
+    message += '\n' + stack;
+    operation_feedback(message, false);
+    //new Audio('https://vocaroo.com/i/s0QF9xjIz8zZ.mp3').play();
+    $('#audio').html('<audio autoplay><source src="../sfx/fmj.mp3"></audio>');
+  }
+});
+
 
 //binds event to resolution tab click
 document.querySelector('button#resolution_tab').addEventListener('click', open_tab.bind(this,'resolution_tab'));
